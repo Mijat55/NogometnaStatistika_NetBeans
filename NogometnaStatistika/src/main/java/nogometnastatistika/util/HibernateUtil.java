@@ -7,6 +7,9 @@ package nogometnastatistika.util;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 
+
+
+
 /**
  *
  * @author Marko

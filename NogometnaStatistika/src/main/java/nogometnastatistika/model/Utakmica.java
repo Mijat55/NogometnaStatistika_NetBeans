@@ -5,32 +5,45 @@
 package nogometnastatistika.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Utakmica extends Entitet{
-    
-        private String domaciKlub;
-	private String gostiKlub;
+    @ManyToOne
+        private Klub domaciKlub;
+    @ManyToOne
+        private Klub gostiKlub;
 	private Date vrijemePocetka;
 	private Long maksimalanBrojNavijaca;
 	private String stadion;
 
-    public String getDomaciKlub() {
+    public Klub getDomaciKlub() {
         return domaciKlub;
     }
 
-    public void setDomaciKlub(String domaciKlub) {
+    public void setDomaciKlub(Klub domaciKlub) {
         this.domaciKlub = domaciKlub;
     }
 
-    public String getGostiKlub() {
+    public Klub getGostiKlub() {
         return gostiKlub;
     }
 
-    public void setGostiKlub(String gostiKlub) {
+    public void setGostiKlub(Klub gostiKlub) {
         this.gostiKlub = gostiKlub;
     }
+
+  
+                
+	
+
+   
+
+   
+
+   
 
     public Date getVrijemePocetka() {
         return vrijemePocetka;

@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Dogadjaj extends Entitet{
     
-        private String minuta;
+        private Integer minuta;
         @ManyToOne
 	private Igrac igrac;
         @ManyToOne
@@ -18,11 +18,11 @@ public class Dogadjaj extends Entitet{
         @ManyToOne
 	private Vrsta vrsta;
 
-    public String getMinuta() {
+    public Integer getMinuta() {
         return minuta;
     }
 
-    public void setMinuta(String minuta) {
+    public void setMinuta(Integer minuta) {
         this.minuta = minuta;
     }
 

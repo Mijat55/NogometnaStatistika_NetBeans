@@ -4,6 +4,8 @@
 
 package nogometnastatistika;
 
+import nogometnastatistika.util.PocetniInsert;
+
 /**
  *
  * @author Marko
@@ -11,6 +13,6 @@ package nogometnastatistika;
 public class NogometnaStatistika {
 
     public static void main(String[] args) {
-       
+        new PocetniInsert();
     }
 }

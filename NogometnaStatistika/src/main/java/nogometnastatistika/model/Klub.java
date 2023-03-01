@@ -7,7 +7,7 @@ package nogometnastatistika.model;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Klub extends Entitet{
+public  class Klub extends Entitet{
     
     private String naziv;
 
