@@ -4,7 +4,9 @@
 
 package nogometnastatistika;
 
-import nogometnastatistika.util.PocetniInsert;
+
+
+
 
 /**
  *
@@ -13,6 +15,13 @@ import nogometnastatistika.util.PocetniInsert;
 public class NogometnaStatistika {
 
     public static void main(String[] args) {
-        new PocetniInsert();
-    }
+   
+           
+            
+            
+            
+        
+             }
 }
+    
+
