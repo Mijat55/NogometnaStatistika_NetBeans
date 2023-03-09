@@ -16,7 +16,7 @@ public class NogometnaStatistika {
 
     public static void main(String[] args) {
    
-           /
+           //
             
             
             
