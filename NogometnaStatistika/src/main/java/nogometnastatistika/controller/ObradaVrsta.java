@@ -21,15 +21,37 @@ public class ObradaVrsta extends Obrada<Vrsta>{
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {
+        kontrolaVrsta();
     }
 
     @Override
     protected void kontrolaPromjena() throws NogometnaStatistikaException {
+        kontrolaVrsta();
     }
 
     @Override
     protected void kontrolaBrisanje() throws NogometnaStatistikaException {
     }
     
-    
+      private void kontrolaVrsta() throws NogometnaStatistikaException{
+        kontrolaVrstaNull();
+        kontrolaVrstaMaksimalnaDuzina();
+        kontrolaVrstaMinimalnaDuzina();
+        
+    }
+    private void kontrolaVrstaNull() throws NogometnaStatistikaException  {
+        if(entitet.getNaziv()==null){
+            throw new NogometnaStatistikaException("Naziv vrste mora biti postavljen");
+        }
+    }
+      private void kontrolaVrstaMaksimalnaDuzina() throws NogometnaStatistikaException  {
+         if(entitet.getNaziv().trim().length()>30){
+             throw new NogometnaStatistikaException("Naziv vrste može imati maksimalno 30 znakova");
+         } 
+    }
+            private void kontrolaVrstaMinimalnaDuzina() throws NogometnaStatistikaException  {
+         if(entitet.getNaziv().trim().length()<3){
+             throw new NogometnaStatistikaException("Naziv vrste mora imati minimalno 3 znaka");
+         } 
+    }
 }

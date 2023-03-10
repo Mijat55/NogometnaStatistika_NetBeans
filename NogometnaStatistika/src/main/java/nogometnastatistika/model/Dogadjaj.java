@@ -4,7 +4,9 @@
  */
 package nogometnastatistika.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -12,10 +14,16 @@ public class Dogadjaj extends Entitet{
     
         private Integer minuta;
         @ManyToOne
+     @JoinColumn(
+     name = "igrac")
 	private Igrac igrac;
         @ManyToOne
+     @JoinColumn(
+     name = "utakmica")
 	private Utakmica utakmica;
         @ManyToOne
+     @JoinColumn(
+     name = "vrsta")
 	private Vrsta vrsta;
 
     public Integer getMinuta() {

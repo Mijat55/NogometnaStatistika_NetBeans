@@ -13,7 +13,7 @@ import nogometnastatistika.util.NogometnaStatistikaException;
  *
  * @author Marko
  */
-public class ObradaKlub extends Obrada<Klub>{
+public class ObradaKlub extends ObradaBezEntiteta<Klub>{
 
     @Override
     public List<Klub> read() {

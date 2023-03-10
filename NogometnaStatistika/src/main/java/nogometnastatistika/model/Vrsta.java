@@ -4,11 +4,13 @@
  */
 package nogometnastatistika.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Vrsta extends Entitet{
-    
+    @Column(
+    columnDefinition = "varchar(30)")
         private String naziv;
 	private boolean gol;
 

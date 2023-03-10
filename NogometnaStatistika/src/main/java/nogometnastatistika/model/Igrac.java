@@ -4,21 +4,37 @@
  */
 package nogometnastatistika.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 public class Igrac extends Entitet{
-    
+    @Column(
+    columnDefinition = "varchar(30)")
         private String ime;
+    @Column(
+    columnDefinition = "varchar(50)")
 	private String prezime;
+    @Column(
+    name = "datum_rodjenja",
+    columnDefinition = "datetime")
 	private Date datumRodjenja;
+    @Column(
+    columnDefinition = "varchar(11)")
 	private String oib;
+    @Column(
+    name = "trenutna_vrijednost")
 	private BigDecimal trenutnaVrijednost;
+    @Column(
+    columnDefinition = "varchar(20)")
 	private String pozicija;
         @ManyToOne
+    @JoinColumn(
+    name = "klub")
 	private Klub klub;
 
     public String getIme() {
@@ -61,6 +77,9 @@ public class Igrac extends Entitet{
         this.trenutnaVrijednost = trenutnaVrijednost;
     }
 
+    
+
+   
     public String getPozicija() {
         return pozicija;
     }
@@ -76,6 +95,12 @@ public class Igrac extends Entitet{
     public void setKlub(Klub klub) {
         this.klub = klub;
     }
+
+  
+
+
+    
+   
         
     
 }

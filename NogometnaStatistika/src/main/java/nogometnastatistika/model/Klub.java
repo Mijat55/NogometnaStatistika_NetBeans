@@ -4,11 +4,19 @@
  */
 package nogometnastatistika.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-public  class Klub extends Entitet{
-    
+public  class Klub {
+   @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int klub_sifra;
+    @Column(
+    columnDefinition = "varchar(20)")
     private String naziv;
 
     public String getNaziv() {
@@ -18,5 +26,16 @@ public  class Klub extends Entitet{
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
+
+    public int getKlub_sifra() {
+        return klub_sifra;
+    }
+
+    public void setKlub_sifra(int klub_sifra) {
+        this.klub_sifra = klub_sifra;
+    }
+
+  
+ 
     
 }

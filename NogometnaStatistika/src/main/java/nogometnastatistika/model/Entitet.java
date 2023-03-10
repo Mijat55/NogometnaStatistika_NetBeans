@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Entitet {
+abstract public class Entitet {
       @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sifra;
