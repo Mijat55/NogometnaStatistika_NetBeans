@@ -22,7 +22,7 @@ private ObradaOperater obrada;
     public ProzorLogin() {
         initComponents();
         obrada = new ObradaOperater();
-      //  setIconImage();
+      // setIcon();
         setTitle(Aplikacija.NAZIV_APP + " Login");
     }
     
@@ -42,6 +42,8 @@ private ObradaOperater obrada;
             lblPoruka.setText("Neispravna kombinacija Email-a i Lozinke");
             return;
         }
+        Aplikacija.OPERATER=o;
+        
         new ProzorIzbornik().setVisible(true);
         dispose();
                 
@@ -56,76 +58,91 @@ private ObradaOperater obrada;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        pswLozinka = new javax.swing.JPasswordField();
+        jPanel1 = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
         lblPoruka = new javax.swing.JLabel();
+        pswLozinka = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 0));
 
-        jLabel1.setText("Email");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtEmail.setText("mijat5555@gmail.com");
-        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtEmailKeyPressed(evt);
-            }
-        });
-
-        jLabel2.setText("Lozinka");
-
-        pswLozinka.setText("edunova");
-        pswLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                pswLozinkaKeyPressed(evt);
-            }
-        });
-
+        btnLogin.setBackground(new java.awt.Color(153, 153, 153));
+        btnLogin.setFont(new java.awt.Font("DialogInput", 3, 14)); // NOI18N
         btnLogin.setText("LOGIN");
+        btnLogin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 180, -1));
+        jPanel1.add(lblPoruka, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 382, 40));
+
+        pswLozinka.setBackground(new java.awt.Color(204, 204, 204));
+        pswLozinka.setText("edunova");
+        pswLozinka.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        pswLozinka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pswLozinkaActionPerformed(evt);
+            }
+        });
+        pswLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pswLozinkaKeyPressed(evt);
+            }
+        });
+        jPanel1.add(pswLozinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 250, -1));
+
+        jLabel2.setFont(new java.awt.Font("Lucida Console", 3, 12)); // NOI18N
+        jLabel2.setText("Lozinka:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 73, 20));
+
+        txtEmail.setBackground(new java.awt.Color(204, 204, 204));
+        txtEmail.setText("mijat5555@gmail.com");
+        txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 250, -1));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Console", 3, 12)); // NOI18N
+        jLabel1.setText("Email:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 70, 20));
+
+        jLabel3.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
+        jLabel3.setText("Nogometna Statistika");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 237, 40));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginPic.jpg"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pswLozinka, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pswLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnLogin)
-                .addGap(33, 33, 33)
-                .addComponent(lblPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,9 +187,15 @@ private ObradaOperater obrada;
         }
     }//GEN-LAST:event_pswLozinkaKeyPressed
 
-   // private void setIconImage() {
-       // setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ngss.jpg" + Aplikacija.NAZIV_APP + " Login")));
-   // }
+    private void pswLozinkaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswLozinkaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pswLozinkaActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+ 
 
    
 
@@ -180,8 +203,18 @@ private ObradaOperater obrada;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblPoruka;
     private javax.swing.JPasswordField pswLozinka;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
+
+   // private void setIcon() {
+        
+  
+//setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ball.png" )));
+
+//}
 }
