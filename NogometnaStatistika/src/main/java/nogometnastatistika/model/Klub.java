@@ -35,6 +35,11 @@ public  class Klub {
         this.klub_sifra = klub_sifra;
     }
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+
   
  
     

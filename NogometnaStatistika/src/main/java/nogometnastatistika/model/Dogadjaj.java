@@ -57,6 +57,11 @@ public class Dogadjaj extends Entitet{
     public void setVrsta(Vrsta vrsta) {
         this.vrsta = vrsta;
     }
+
+    @Override
+    public String toString() {
+        return igrac + " " +"/"+ " " + utakmica + " "+"/"+" " + vrsta + " "+"~"+" " + minuta + " " +"minuta";
+    }
         
         
     

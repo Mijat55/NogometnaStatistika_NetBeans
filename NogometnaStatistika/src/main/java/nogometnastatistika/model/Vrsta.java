@@ -29,7 +29,12 @@ public class Vrsta extends Entitet{
     public void setGol(boolean gol) {
         this.gol = gol;
     }
+
+    @Override
+    public String toString() {
+        return naziv + " " + gol;
         
-        
+       }
+               
     
 }

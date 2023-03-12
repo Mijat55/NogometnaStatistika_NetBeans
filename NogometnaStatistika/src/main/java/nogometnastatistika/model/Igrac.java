@@ -96,6 +96,11 @@ public class Igrac extends Entitet{
         this.klub = klub;
     }
 
+    @Override
+    public String toString() {
+        return "+" + ime + "-" + prezime + "-" + klub;
+    }
+
   
 
 

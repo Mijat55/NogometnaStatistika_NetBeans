@@ -15,8 +15,14 @@ import jakarta.persistence.Entity;
 public class Operater extends Entitet{
      @Column(columnDefinition = "char(61)")
     private char[] lozinka;
+     @Column(
+     columnDefinition = "varchar(30)")
     private String ime;
+     @Column(
+     columnDefinition = "varchar(50)")
     private String prezime;
+     @Column(
+     columnDefinition = "varchar(11)")
     private String oib;
     private String email;
 

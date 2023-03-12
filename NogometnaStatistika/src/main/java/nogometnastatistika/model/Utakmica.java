@@ -87,5 +87,11 @@ public class Utakmica extends Entitet{
     public void setStadion(String stadion) {
         this.stadion = stadion;
     }
-       
+
+    @Override
+    public String toString() {
+        return domaciKlub + " " + "-" + " " + gostiKlub + " " + ":" + " " + vrijemePocetka;
+                
+    }
+     
 }
