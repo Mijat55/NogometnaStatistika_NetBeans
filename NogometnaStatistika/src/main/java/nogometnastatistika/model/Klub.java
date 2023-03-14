@@ -12,9 +12,11 @@ import jakarta.persistence.Id;
 
 @Entity
 public  class Klub {
-   @Id
+         @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int klub_sifra;
+      
+   
     @Column(
     columnDefinition = "varchar(20)")
     private String naziv;
@@ -27,13 +29,7 @@ public  class Klub {
         this.naziv = naziv;
     }
 
-    public int getKlub_sifra() {
-        return klub_sifra;
-    }
-
-    public void setKlub_sifra(int klub_sifra) {
-        this.klub_sifra = klub_sifra;
-    }
+   
 
     @Override
     public String toString() {

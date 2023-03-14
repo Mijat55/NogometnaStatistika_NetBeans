@@ -32,7 +32,7 @@ public class Vrsta extends Entitet{
 
     @Override
     public String toString() {
-        return naziv + " " + gol;
+        return naziv;
         
        }
                

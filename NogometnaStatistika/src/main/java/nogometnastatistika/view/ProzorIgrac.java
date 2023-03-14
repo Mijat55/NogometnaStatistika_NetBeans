@@ -4,10 +4,16 @@
  */
 package nogometnastatistika.view;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import nogometnastatistika.controller.ObradaIgrac;
 import nogometnastatistika.model.Igrac;
 import nogometnastatistika.util.Aplikacija;
+import nogometnastatistika.util.NogometnaStatistikaException;
 
 /**
  *
@@ -15,12 +21,16 @@ import nogometnastatistika.util.Aplikacija;
  */
 public class ProzorIgrac extends javax.swing.JFrame {
  private ObradaIgrac obrada;
+ private DecimalFormat df;
     /**
      * Creates new form ProzorIgrac
      */
     public ProzorIgrac() {
         initComponents();
          obrada = new ObradaIgrac();
+         DecimalFormatSymbols dfs = new DecimalFormatSymbols(new Locale("hr", "HR"));
+         df = new DecimalFormat("###,##0.00",dfs);
+         
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
                 ": Klubovi");
@@ -59,6 +69,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
         txtPozicija = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtKlubIgraca = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,6 +90,13 @@ public class ProzorIgrac extends javax.swing.JFrame {
         jLabel6.setText("~Pozicija Igrača~");
 
         jLabel7.setText("~Klub Igrača~");
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,17 +119,18 @@ public class ProzorIgrac extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPozicija, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDodaj))
                 .addGap(0, 64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
@@ -135,21 +154,47 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addComponent(txtPozicija, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 42, Short.MAX_VALUE))
+                        .addComponent(btnDodaj))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+       obrada.setEntitet(new Igrac());
+       napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka()); }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+     private void napuniModel(){
+    var i = obrada.getEntitet();
+    i.setIme(txtIme.getText());
+    i.setPrezime(txtPrezime.getText());
+    i.setPozicija(txtPozicija.getText());
+   // i.setDatumRodjenja(datumRodjenja);
+   //i.setOib(oib);
+  // i.setKlub(klub);
+         try {
+              i.setTrenutnaVrijednost(BigDecimal.valueOf(df.parse(txtTrenutnaVrijednost.getText()).byteValue()));
+         } catch (Exception e) {
+         }
+         
+    
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

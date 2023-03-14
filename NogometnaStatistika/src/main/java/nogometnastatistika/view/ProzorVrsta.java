@@ -5,9 +5,11 @@
 package nogometnastatistika.view;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import nogometnastatistika.controller.ObradaVrsta;
 import nogometnastatistika.model.Vrsta;
 import nogometnastatistika.util.Aplikacija;
+import nogometnastatistika.util.NogometnaStatistikaException;
 
 /**
  *
@@ -49,6 +51,7 @@ private ObradaVrsta obrada;
         jLabel1 = new javax.swing.JLabel();
         txtNazivVrsta = new javax.swing.JTextField();
         chbGol = new javax.swing.JCheckBox();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,41 +61,69 @@ private ObradaVrsta obrada;
 
         chbGol.setText("~Postignut Gol~");
 
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNazivVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chbGol))
-                .addGap(0, 64, Short.MAX_VALUE))
+                    .addComponent(chbGol)
+                    .addComponent(btnDodaj))
+                .addGap(0, 52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 50, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNazivVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(chbGol)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNazivVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(chbGol)
+                        .addGap(181, 181, 181)
+                        .addComponent(btnDodaj))
+                    .addComponent(jScrollPane1))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+       obrada.setEntitet(new Vrsta());
+       napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka()); }
+        
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+   private void napuniModel(){
+    var v = obrada.getEntitet();
+    v.setNaziv(txtNazivVrsta.getText());
+    v.setGol(chbGol.isSelected());
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JCheckBox chbGol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

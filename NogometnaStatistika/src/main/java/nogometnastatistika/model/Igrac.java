@@ -98,7 +98,7 @@ public class Igrac extends Entitet{
 
     @Override
     public String toString() {
-        return "+" + ime + "-" + prezime + "-" + klub;
+        return  ime + " " + prezime + "-" + "("+  klub + ")";
     }
 
   

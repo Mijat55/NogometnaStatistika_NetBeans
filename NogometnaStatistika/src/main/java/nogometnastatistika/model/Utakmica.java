@@ -30,7 +30,7 @@ public class Utakmica extends Entitet{
     @Column(
     name = "maksimalan_broj_navijaca",
     columnDefinition = "decimal(38,2)")
-	private Long maksimalanBrojNavijaca;
+	private Integer maksimalanBrojNavijaca;
     @Column(
     columnDefinition = "varchar(30)")
 	private String stadion;
@@ -72,11 +72,11 @@ public class Utakmica extends Entitet{
         this.vrijemePocetka = vrijemePocetka;
     }
 
-    public Long getMaksimalanBrojNavijaca() {
+    public Integer getMaksimalanBrojNavijaca() {
         return maksimalanBrojNavijaca;
     }
 
-    public void setMaksimalanBrojNavijaca(Long maksimalanBrojNavijaca) {
+    public void setMaksimalanBrojNavijaca(Integer maksimalanBrojNavijaca) {
         this.maksimalanBrojNavijaca = maksimalanBrojNavijaca;
     }
 
@@ -90,7 +90,7 @@ public class Utakmica extends Entitet{
 
     @Override
     public String toString() {
-        return domaciKlub + " " + "-" + " " + gostiKlub + " " + ":" + " " + vrijemePocetka;
+        return domaciKlub + " " + "vs" + " " + gostiKlub + " " + ":" + "(" + vrijemePocetka + ")";
                 
     }
      
