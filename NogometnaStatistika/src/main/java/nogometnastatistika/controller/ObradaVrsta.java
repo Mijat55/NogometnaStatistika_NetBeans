@@ -31,6 +31,12 @@ public class ObradaVrsta extends Obrada<Vrsta>{
 
     @Override
     protected void kontrolaBrisanje() throws NogometnaStatistikaException {
+        
+            if(entitet.getDogadjaji()!=null && !entitet.getDogadjaji().isEmpty()){
+             throw new NogometnaStatistikaException("Vrsta se ne može obrisati jer ima događaj");
+           
+       }
+       
     }
     
       private void kontrolaVrsta() throws NogometnaStatistikaException{

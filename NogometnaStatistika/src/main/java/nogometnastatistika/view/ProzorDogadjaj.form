@@ -26,18 +26,24 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="txtIgračDogadjaj" min="-2" pref="230" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="txtUtakmicaDogadjaj" min="-2" pref="230" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="txtVrstaDogadjaj" min="-2" pref="230" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtMinuta" min="-2" pref="230" max="-2" attributes="0"/>
-                  <Component id="btnDodaj" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="btnDodaj" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnPromjeni" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnObrisi" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="txtMinuta" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtVrstaDogadjaj" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtUtakmicaDogadjaj" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtIgračDogadjaj" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,7 +69,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtMinuta" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="btnDodaj" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPromjeni" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
@@ -80,12 +90,16 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="lstPodatci4">
+        <Component class="javax.swing.JList" name="lstPodaci">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstPodaciValueChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Dogadjaj&gt;"/>
           </AuxValues>
@@ -94,21 +108,21 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="~&#x160;ifra Igra&#x10d;a~"/>
+        <Property name="text" type="java.lang.String" value="~Unos Igra&#x10d;a~"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIgra&#x10d;Dogadjaj">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="~&#x160;ifra Utakmice~"/>
+        <Property name="text" type="java.lang.String" value="~Unos Utakmice~"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUtakmicaDogadjaj">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="~&#x160;ifra Vrste~"/>
+        <Property name="text" type="java.lang.String" value="~Unos Vrste~"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtVrstaDogadjaj">
@@ -126,6 +140,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPromjeni">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Promjeni"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromjeniActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnObrisi">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Obri&#x161;i"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrisiActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

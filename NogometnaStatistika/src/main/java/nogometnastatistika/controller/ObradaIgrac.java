@@ -42,11 +42,15 @@ public class ObradaIgrac extends Obrada<Igrac>{
 
     @Override
     protected void kontrolaBrisanje() throws NogometnaStatistikaException {
+         if(entitet.getDogadjaji()!=null && !entitet.getDogadjaji().isEmpty()){
+             throw new NogometnaStatistikaException("Igrač se ne može obrisati jer ima događaj");
+           
+       }
     }
-    private void kontrolaDatum()throws NogometnaStatistikaException{
+   // private void kontrolaDatum()throws NogometnaStatistikaException{
         
                 
-        }
+       // }
                         
         
                         

@@ -6,6 +6,8 @@ package nogometnastatistika.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Vrsta extends Entitet{
@@ -13,6 +15,8 @@ public class Vrsta extends Entitet{
     columnDefinition = "varchar(30)")
         private String naziv;
 	private boolean gol;
+        @OneToMany(mappedBy = "vrsta")
+        private List<Dogadjaj> dogadjaji;
 
     public String getNaziv() {
         return naziv;
@@ -30,6 +34,15 @@ public class Vrsta extends Entitet{
         this.gol = gol;
     }
 
+    public List<Dogadjaj> getDogadjaji() {
+        return dogadjaji;
+    }
+
+    public void setDogadjaji(List<Dogadjaj> dogadjaji) {
+        this.dogadjaji = dogadjaji;
+    }
+    
+ 
     @Override
     public String toString() {
         return naziv;

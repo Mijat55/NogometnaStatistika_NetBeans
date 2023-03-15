@@ -35,7 +35,15 @@ public class ObradaKlub extends ObradaKlubEntitet<Klub>{
 
     @Override
     protected void kontrolaBrisanje() throws NogometnaStatistikaException {
-       
+       if(entitet.getIgraci()!=null && !entitet.getIgraci().isEmpty()){
+           throw new NogometnaStatistikaException("Klub se ne može obrisati jer ima igrače");
+       }
+       if(entitet.getUtakmica()!=null && !entitet.getUtakmica().isEmpty()){
+           throw new NogometnaStatistikaException("Klub se ne može obrisati jer ima utakmice");
+       }
+       if(entitet.getUtakmice()!=null && !entitet.getUtakmice().isEmpty()){
+           throw new NogometnaStatistikaException("Klub se ne može obrisati jer ima utakmice");
+       }
     }
     
     private void kontrolaNaziv() throws NogometnaStatistikaException{
@@ -45,6 +53,7 @@ public class ObradaKlub extends ObradaKlubEntitet<Klub>{
          kontrolaNazivMinimalnaDuzina();
          kontrolaNazivNijeBroj();
     }
+    
     
     private void kontrolaNazivDupliUBazi() throws NogometnaStatistikaException  {
         List<Klub> klubovi=null;

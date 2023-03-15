@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class Utakmica extends Entitet{
     @Column(
     columnDefinition = "varchar(30)")
 	private String stadion;
+    @OneToMany(mappedBy = "utakmica")
+    private List<Dogadjaj> dogadjaji;
 
     public Klub getDomaciKlub() {
         return domaciKlub;
@@ -50,19 +53,6 @@ public class Utakmica extends Entitet{
     public void setGostiKlub(Klub gostiKlub) {
         this.gostiKlub = gostiKlub;
     }
-
-   
-
-    
-  
-                
-	
-
-   
-
-   
-
-   
 
     public Date getVrijemePocetka() {
         return vrijemePocetka;
@@ -88,9 +78,20 @@ public class Utakmica extends Entitet{
         this.stadion = stadion;
     }
 
+    public List<Dogadjaj> getDogadjaji() {
+        return dogadjaji;
+    }
+
+    public void setDogadjaji(List<Dogadjaj> dogadjaji) {
+        this.dogadjaji = dogadjaji;
+    }
+    
+public String getDomaciGosti(){
+        return getDomaciKlub()+ " " + getGostiKlub();
+    }
     @Override
     public String toString() {
-        return domaciKlub + " " + "vs" + " " + gostiKlub + " " + ":" + "(" + vrijemePocetka + ")";
+        return domaciKlub + " " + "vs" + " " + gostiKlub;
                 
     }
      

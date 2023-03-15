@@ -39,8 +39,8 @@ public class ProzorIgrac extends javax.swing.JFrame {
     private void ucitaj(){
         DefaultListModel<Igrac> m = new DefaultListModel<>();
     m.addAll(obrada.read());
-    lstPodatci2.setModel(m);
-    lstPodatci2.repaint();
+    lstPodaci.setModel(m);
+    lstPodaci.repaint();
     
 }
 
@@ -54,7 +54,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstPodatci2 = new javax.swing.JList<>();
+        lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtIme = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -69,11 +69,19 @@ public class ProzorIgrac extends javax.swing.JFrame {
         txtPozicija = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtKlubIgraca = new javax.swing.JTextField();
+        btnPromjeni = new javax.swing.JButton();
         btnDodaj = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane1.setViewportView(lstPodatci2);
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("~Ime~");
 
@@ -91,10 +99,24 @@ public class ProzorIgrac extends javax.swing.JFrame {
 
         jLabel7.setText("~Klub Igrača~");
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
             }
         });
 
@@ -105,23 +127,28 @@ public class ProzorIgrac extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDatumRodjenja, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTrenutnaVrijednost, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPozicija, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDodaj))
-                .addGap(0, 64, Short.MAX_VALUE))
+                    .addComponent(txtKlubIgraca)
+                    .addComponent(txtPozicija)
+                    .addComponent(txtTrenutnaVrijednost)
+                    .addComponent(txtOib)
+                    .addComponent(txtDatumRodjenja)
+                    .addComponent(txtPrezime)
+                    .addComponent(txtIme)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,25 +184,83 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDodaj))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+    if(lstPodaci.getSelectedValue()==null){
+           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite igrača :)");
+           return;
+       }
+       
+       napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+          if(evt.getValueIsAdjusting()){
+           return;
+       }
+       if(lstPodaci.getSelectedValue()==null){
+           return;
+       }
+       obrada.setEntitet(lstPodaci.getSelectedValue());
+       
+       napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-       obrada.setEntitet(new Igrac());
+  obrada.setEntitet(new Igrac());
        napuniModel();
         try {
             obrada.create();
             ucitaj();
         } catch (NogometnaStatistikaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka()); }
-    }//GEN-LAST:event_btnDodajActionPerformed
+            
+                }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+       if(lstPodaci.getSelectedValue()==null){
+          JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite igrača");
+          return;
+      }
+          if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + obrada.getEntitet().getImePrezime()+ "?","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;
+      }
+         try {
+            obrada.delete();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+private void napuniView(){
+    var i = obrada.getEntitet();
+    txtIme.setText(i.getIme());
+    txtPrezime.setText(i.getPrezime());
+    txtOib.setText(i.getOib());
+    txtPozicija.setText(i.getPozicija());
+    //txtDatumRodjenja.setText(i.getDatumRodjenja());
+    txtTrenutnaVrijednost.setText(df.format(i.getTrenutnaVrijednost()));
+    //txtKlubIgraca.setText(i.getKlub());
+}
+    
+    
+    
      private void napuniModel(){
     var i = obrada.getEntitet();
     i.setIme(txtIme.getText());
@@ -195,6 +280,8 @@ public class ProzorIgrac extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -203,7 +290,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Igrac> lstPodatci2;
+    private javax.swing.JList<Igrac> lstPodaci;
     private javax.swing.JTextField txtDatumRodjenja;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtKlubIgraca;

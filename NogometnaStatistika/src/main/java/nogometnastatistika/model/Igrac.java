@@ -8,8 +8,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Igrac extends Entitet{
@@ -36,6 +38,8 @@ public class Igrac extends Entitet{
     @JoinColumn(
     name = "klub")
 	private Klub klub;
+        @OneToMany(mappedBy = "igrac")
+        private List<Dogadjaj> dogadjaji;
 
     public String getIme() {
         return ime;
@@ -94,6 +98,18 @@ public class Igrac extends Entitet{
 
     public void setKlub(Klub klub) {
         this.klub = klub;
+    }
+
+    public List<Dogadjaj> getDogadjaji() {
+        return dogadjaji;
+    }
+
+    public void setDogadjaji(List<Dogadjaj> dogadjaji) {
+        this.dogadjaji = dogadjaji;
+    }
+    
+    public String getImePrezime(){
+        return getIme() + " " + getPrezime();
     }
 
     @Override

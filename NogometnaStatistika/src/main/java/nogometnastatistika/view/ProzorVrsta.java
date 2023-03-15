@@ -32,8 +32,8 @@ private ObradaVrsta obrada;
          DefaultListModel<Vrsta> m = new DefaultListModel<>();
     m.addAll(obrada.read());
 
-    lstPodatci3.setModel(m);
-    lstPodatci3.repaint();
+    lstPodaci.setModel(m);
+    lstPodaci.repaint();
     
 }
 
@@ -47,15 +47,23 @@ private ObradaVrsta obrada;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstPodatci3 = new javax.swing.JList<>();
+        lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtNazivVrsta = new javax.swing.JTextField();
         chbGol = new javax.swing.JCheckBox();
         btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane1.setViewportView(lstPodatci3);
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("~Naziv~");
 
@@ -68,6 +76,20 @@ private ObradaVrsta obrada;
             }
         });
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,12 +98,17 @@ private ObradaVrsta obrada;
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNazivVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbGol)
-                    .addComponent(btnDodaj))
-                .addGap(0, 52, Short.MAX_VALUE))
+                    .addComponent(txtNazivVrsta))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,9 +122,12 @@ private ObradaVrsta obrada;
                         .addGap(18, 18, 18)
                         .addComponent(chbGol)
                         .addGap(181, 181, 181)
-                        .addComponent(btnDodaj))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi)))
                     .addComponent(jScrollPane1))
-                .addGap(0, 40, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +145,56 @@ private ObradaVrsta obrada;
         
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+          if(evt.getValueIsAdjusting()){
+           return;
+       }
+       if(lstPodaci.getSelectedValue()==null){
+           return;
+       }
+       obrada.setEntitet(lstPodaci.getSelectedValue());
+       
+       napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+       if(lstPodaci.getSelectedValue()==null){
+           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite vrstu :)");
+           return;
+       }
+       
+       napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+          JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite vrstu");
+          return;
+      }
+             if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getNaziv()+" " + "?","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;
+      }
+         try {
+            obrada.delete();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+private void napuniView(){
+    var v = obrada.getEntitet();
+    txtNazivVrsta.setText(v.getNaziv());
+    chbGol.setSelected(v.isGol());
+    
+}
+    
+    
+    
    private void napuniModel(){
     var v = obrada.getEntitet();
     v.setNaziv(txtNazivVrsta.getText());
@@ -124,10 +204,12 @@ private ObradaVrsta obrada;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JCheckBox chbGol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Vrsta> lstPodatci3;
+    private javax.swing.JList<Vrsta> lstPodaci;
     private javax.swing.JTextField txtNazivVrsta;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,7 +32,10 @@ public class ObradaUtakmica extends Obrada<Utakmica>{
 
     @Override
     protected void kontrolaBrisanje() throws NogometnaStatistikaException {
-        
+         if(entitet.getDogadjaji()!=null && !entitet.getDogadjaji().isEmpty()){
+             throw new NogometnaStatistikaException("Utakmica se ne može obrisati jer ima događaj");
+           
+       }
     }
     
     

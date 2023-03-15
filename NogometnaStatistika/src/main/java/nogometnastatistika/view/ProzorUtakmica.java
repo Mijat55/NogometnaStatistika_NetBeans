@@ -33,8 +33,8 @@ private ObradaUtakmica obrada;
         DefaultListModel<Utakmica> m = new DefaultListModel<>();
     m.addAll(obrada.read());
 
-    lstPodatci1.setModel(m);
-    lstPodatci1.repaint();
+    lstPodaci.setModel(m);
+    lstPodaci.repaint();
     
 }
     /**
@@ -47,7 +47,7 @@ private ObradaUtakmica obrada;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstPodatci1 = new javax.swing.JList<>();
+        lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtDomaciKlub = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -59,10 +59,18 @@ private ObradaUtakmica obrada;
         jLabel5 = new javax.swing.JLabel();
         txtStadion = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane1.setViewportView(lstPodatci1);
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("~Domaći Klub~");
 
@@ -83,6 +91,20 @@ private ObradaUtakmica obrada;
             }
         });
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,19 +112,24 @@ private ObradaUtakmica obrada;
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDodaj)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDomaciKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGostiKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtVrijemePocetka, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txtBrojNavijaca, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtStadion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 64, Short.MAX_VALUE))
+                    .addComponent(txtStadion)
+                    .addComponent(txtBrojNavijaca)
+                    .addComponent(txtVrijemePocetka)
+                    .addComponent(txtGostiKlub)
+                    .addComponent(txtDomaciKlub))
+                .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,9 +157,12 @@ private ObradaUtakmica obrada;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtStadion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDodaj))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi)))
                     .addComponent(jScrollPane1))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,7 +178,60 @@ private ObradaUtakmica obrada;
         } catch (NogometnaStatistikaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka()); }
     }//GEN-LAST:event_btnDodajActionPerformed
- private void napuniModel(){
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+      if(evt.getValueIsAdjusting()){
+           return;
+       }
+       if(lstPodaci.getSelectedValue()==null){
+           return;
+       }
+       obrada.setEntitet(lstPodaci.getSelectedValue());
+       
+       napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+      if(lstPodaci.getSelectedValue()==null){
+           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite utakmicu :)");
+           return;
+       }
+       
+       napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+           if(lstPodaci.getSelectedValue()==null){
+          JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite utakmicu");
+          return;
+      }
+           if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getDomaciGosti()+" " + "?","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;
+      }
+         try {
+            obrada.delete();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+ private void napuniView(){
+    var u = obrada.getEntitet();
+    //txtDomaciKlub.setText(u.getDomaciKlub());
+    //txtGostiKlub.setText(u.getGostiKlub());
+    txtBrojNavijaca.setText(String.valueOf(u.getMaksimalanBrojNavijaca()));
+    //txtVrijemePocetka.setText(u.getVrijemePocetka());
+    txtStadion.setText(u.getStadion());
+}
+    
+    
+    
+    private void napuniModel(){
     var u = obrada.getEntitet();
    // u.setDomaciKlub(txtDomaciKlub.getText());
    // u.setGostiKlub
@@ -164,13 +247,15 @@ private ObradaUtakmica obrada;
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Utakmica> lstPodatci1;
+    private javax.swing.JList<Utakmica> lstPodaci;
     private javax.swing.JTextField txtBrojNavijaca;
     private javax.swing.JTextField txtDomaciKlub;
     private javax.swing.JTextField txtGostiKlub;

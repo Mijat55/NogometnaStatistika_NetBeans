@@ -33,8 +33,8 @@ private ObradaDogadjaj obrada;
              DefaultListModel<Dogadjaj> m = new DefaultListModel<>();
     m.addAll(obrada.read());
 
-    lstPodatci4.setModel(m);
-    lstPodatci4.repaint();
+    lstPodaci.setModel(m);
+    lstPodaci.repaint();
     
 }
 
@@ -48,7 +48,7 @@ private ObradaDogadjaj obrada;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstPodatci4 = new javax.swing.JList<>();
+        lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtIgračDogadjaj = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -58,16 +58,24 @@ private ObradaDogadjaj obrada;
         jLabel4 = new javax.swing.JLabel();
         txtMinuta = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane1.setViewportView(lstPodatci4);
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
 
-        jLabel1.setText("~Šifra Igrača~");
+        jLabel1.setText("~Unos Igrača~");
 
-        jLabel2.setText("~Šifra Utakmice~");
+        jLabel2.setText("~Unos Utakmice~");
 
-        jLabel3.setText("~Šifra Vrste~");
+        jLabel3.setText("~Unos Vrste~");
 
         jLabel4.setText("~Minuta Događaja~");
 
@@ -78,6 +86,20 @@ private ObradaDogadjaj obrada;
             }
         });
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,17 +107,22 @@ private ObradaDogadjaj obrada;
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIgračDogadjaj, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUtakmicaDogadjaj, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtVrstaDogadjaj, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDodaj))
-                .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi))
+                    .addComponent(txtMinuta)
+                    .addComponent(txtVrstaDogadjaj)
+                    .addComponent(txtUtakmicaDogadjaj)
+                    .addComponent(txtIgračDogadjaj))
+                .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +146,10 @@ private ObradaDogadjaj obrada;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
-                        .addComponent(btnDodaj))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi)))
                     .addComponent(jScrollPane1))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -137,7 +167,61 @@ private ObradaDogadjaj obrada;
         } catch (NogometnaStatistikaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka()); }
     }//GEN-LAST:event_btnDodajActionPerformed
- private void napuniModel(){
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+          if(evt.getValueIsAdjusting()){
+           return;
+       }
+       if(lstPodaci.getSelectedValue()==null){
+           return;
+       }
+       obrada.setEntitet(lstPodaci.getSelectedValue());
+       
+       napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+     if(lstPodaci.getSelectedValue()==null){
+           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite događaj :)");
+           return;
+       }
+       
+       napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+         if(lstPodaci.getSelectedValue()==null){
+          JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite događaj");
+          return;
+      }
+          if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getIgracVrstaMinutaUtakmica()
+                  + " " + "?","Brisanje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;
+      }
+      
+         try {
+            obrada.delete();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
+ private void napuniView(){
+    var d = obrada.getEntitet();
+    txtMinuta.setText(String.valueOf(d.getMinuta()));
+    //txtUtakmicaDogadjaj.setText(d.getUtakmica());
+    //txtIgračDogadjaj.setText(d.getIgrac());
+    //txtVrstaDogadjaj.setText(d.getVrsta());
+    
+}
+    
+    
+    
+    private void napuniModel(){
     var d = obrada.getEntitet();
     
     //d.setUtakmica(utakmica);
@@ -156,12 +240,14 @@ private ObradaDogadjaj obrada;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Dogadjaj> lstPodatci4;
+    private javax.swing.JList<Dogadjaj> lstPodaci;
     private javax.swing.JTextField txtIgračDogadjaj;
     private javax.swing.JTextField txtMinuta;
     private javax.swing.JTextField txtUtakmicaDogadjaj;

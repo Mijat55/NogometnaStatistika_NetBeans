@@ -35,8 +35,8 @@ public class ProzorKlub extends javax.swing.JFrame {
 private void ucitaj(){
     DefaultListModel<Klub> m = new DefaultListModel<>();
     m.addAll(obrada.read());
-    lstPodatci.setModel(m);
-    lstPodatci.repaint();
+    lstPodaci.setModel(m);
+    lstPodaci.repaint();
     
 }
     /**
@@ -49,14 +49,22 @@ private void ucitaj(){
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstPodatci = new javax.swing.JList<>();
+        lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         txtNaziv = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane1.setViewportView(lstPodatci);
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("~Naziv Kluba~");
 
@@ -67,6 +75,20 @@ private void ucitaj(){
             }
         });
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,11 +96,16 @@ private void ucitaj(){
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDodaj))
-                .addGap(0, 14, Short.MAX_VALUE))
+                    .addComponent(txtNaziv))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +117,10 @@ private void ucitaj(){
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(119, 119, 119)
-                        .addComponent(btnDodaj))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi)))
                     .addComponent(jScrollPane1))
                 .addGap(0, 35, Short.MAX_VALUE))
         );
@@ -108,7 +138,57 @@ private void ucitaj(){
         } catch (NogometnaStatistikaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     }//GEN-LAST:event_btnDodajActionPerformed
-private void napuniModel(){
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+       if(evt.getValueIsAdjusting()){
+           return;
+       }
+       if(lstPodaci.getSelectedValue()==null){
+           return;
+       }
+       obrada.setEntitet(lstPodaci.getSelectedValue());
+       
+       napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+       if(lstPodaci.getSelectedValue()==null){
+           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite klub :)");
+           return;
+       }
+       
+       napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+      if(lstPodaci.getSelectedValue()==null){
+          JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite klub");
+          return;
+      }
+      if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getNaziv() +" " + "?","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;
+      }
+         try {
+            obrada.delete();
+            ucitaj();
+        } catch (NogometnaStatistikaException ex) {
+JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
+      
+      
+    }//GEN-LAST:event_btnObrisiActionPerformed
+private void napuniView(){
+    var k = obrada.getEntitet();
+    txtNaziv.setText(k.getNaziv());
+}
+    
+    
+    private void napuniModel(){
     var k = obrada.getEntitet();
     k.setNaziv(txtNaziv.getText());
     
@@ -116,9 +196,11 @@ private void napuniModel(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Klub> lstPodatci;
+    private javax.swing.JList<Klub> lstPodaci;
     private javax.swing.JTextField txtNaziv;
     // End of variables declaration//GEN-END:variables
 }
