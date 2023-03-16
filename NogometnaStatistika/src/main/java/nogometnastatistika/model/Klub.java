@@ -14,10 +14,10 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public  class Klub {
-         @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int klub_sifra;
+public  class Klub extends Entitet{
+         
+    
+    
          @OneToMany(mappedBy = "domaciKlub")
         private List<Utakmica> utakmice;
          @OneToMany(mappedBy = "gostiKlub")
@@ -37,24 +37,6 @@ public  class Klub {
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
-
-    public int getKlub_sifra() {
-        return klub_sifra;
-    }
-
-    public void setKlub_sifra(int klub_sifra) {
-        this.klub_sifra = klub_sifra;
-    }
-
-  public Klub() {
-        super();
-    }
-
-    public Klub(int klub_sifra) {
-        super();
-        this.klub_sifra = klub_sifra;
-    }
-
 
     public List<Utakmica> getUtakmice() {
         return utakmice;

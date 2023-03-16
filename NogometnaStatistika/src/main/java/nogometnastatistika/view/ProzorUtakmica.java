@@ -196,6 +196,9 @@ private ObradaUtakmica obrada;
            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite utakmicu :)");
            return;
        }
+      if(JOptionPane.showConfirmDialog(getRootPane(),"Sigurno promjeniti 👀" + " " + obrada.getEntitet().getDomaciGosti()+" " + "?" + " ","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;}
        
        napuniModel();
         try {
@@ -210,7 +213,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite utakmicu");
           return;
       }
-           if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getDomaciGosti()+" " + "?","Brisanje"
+           if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getDomaciGosti()+" " + "?"+"😱","Brisanje"
               ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
           return;
       }

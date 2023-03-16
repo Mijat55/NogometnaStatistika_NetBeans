@@ -18,6 +18,18 @@ public class ObradaDogadjaj extends Obrada<Dogadjaj>{
     public List<Dogadjaj> read() {
         return session.createQuery("from Dogadjaj", Dogadjaj.class).list();
     }
+    public List<Dogadjaj> read(String uvjet) {
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+       return session.createQuery("from Dogadjaj "
+               + " where concat(igrac.ime, igrac.prezime, igrac.broj, vrsta.naziv, vrsta.gol, utakmica.domaciKlub.naziv, utakmica.gostiKlub.naziv ) "
+               + " like :uvjet "
+               + " order by igrac, vrsta, minuta, utakmica ", 
+               Dogadjaj.class)
+               .setParameter("uvjet", uvjet)
+               .setMaxResults(30)
+               .list();
+    }
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {

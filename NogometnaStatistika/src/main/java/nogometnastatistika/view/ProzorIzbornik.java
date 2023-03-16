@@ -4,10 +4,12 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import nogometnastatistika.util.Aplikacija;
 
@@ -22,6 +24,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
      */
     public ProzorIzbornik() {
         initComponents();
+    
         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime());
      pokreniSat();
      

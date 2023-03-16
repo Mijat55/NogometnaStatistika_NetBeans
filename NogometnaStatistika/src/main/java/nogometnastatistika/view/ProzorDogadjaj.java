@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ private ObradaDogadjaj obrada;
     }
          private void ucitaj(){
              DefaultListModel<Dogadjaj> m = new DefaultListModel<>();
-    m.addAll(obrada.read());
+    m.addAll(obrada.read(txtUvjet.getText()));
 
     lstPodaci.setModel(m);
     lstPodaci.repaint();
@@ -60,6 +61,8 @@ private ObradaDogadjaj obrada;
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        txtUvjet = new javax.swing.JTextField();
+        btnTrazi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,12 +103,35 @@ private ObradaDogadjaj obrada;
             }
         });
 
+        txtUvjet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUvjetActionPerformed(evt);
+            }
+        });
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
+
+        btnTrazi.setText("🔍");
+        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,7 +154,11 @@ private ObradaDogadjaj obrada;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTrazi))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -151,7 +181,7 @@ private ObradaDogadjaj obrada;
                             .addComponent(btnPromjeni)
                             .addComponent(btnObrisi)))
                     .addComponent(jScrollPane1))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,7 +215,9 @@ private ObradaDogadjaj obrada;
            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite događaj :)");
            return;
        }
-       
+       if(JOptionPane.showConfirmDialog(getRootPane(),"Sigurno promjeniti 👀" + " " + obrada.getEntitet().getIgracVrstaMinutaUtakmica()+" " + "?" + " ","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;}
        napuniModel();
         try {
             obrada.update();
@@ -200,7 +232,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
           return;
       }
           if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getIgracVrstaMinutaUtakmica()
-                  + " " + "?","Brisanje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+                  + " " + "?"+"😱","Brisanje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
           return;
       }
       
@@ -210,6 +242,20 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
         } catch (NogometnaStatistikaException ex) {
 JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void txtUvjetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUvjetActionPerformed
+
+    }//GEN-LAST:event_txtUvjetActionPerformed
+
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            ucitaj();
+        }
+    }//GEN-LAST:event_txtUvjetKeyPressed
+
+    private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
+        ucitaj();
+    }//GEN-LAST:event_btnTraziActionPerformed
  private void napuniView(){
     var d = obrada.getEntitet();
     txtMinuta.setText(String.valueOf(d.getMinuta()));
@@ -242,6 +288,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JButton btnTrazi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -251,6 +298,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JTextField txtIgračDogadjaj;
     private javax.swing.JTextField txtMinuta;
     private javax.swing.JTextField txtUtakmicaDogadjaj;
+    private javax.swing.JTextField txtUvjet;
     private javax.swing.JTextField txtVrstaDogadjaj;
     // End of variables declaration//GEN-END:variables
 }

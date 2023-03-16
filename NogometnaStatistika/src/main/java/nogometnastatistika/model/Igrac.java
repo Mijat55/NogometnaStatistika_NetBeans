@@ -34,6 +34,7 @@ public class Igrac extends Entitet{
     @Column(
     columnDefinition = "varchar(20)")
 	private String pozicija;
+        private Integer broj;
         @ManyToOne
     @JoinColumn(
     name = "klub")
@@ -81,6 +82,14 @@ public class Igrac extends Entitet{
         this.trenutnaVrijednost = trenutnaVrijednost;
     }
 
+    public Integer getBroj() {
+        return broj;
+    }
+
+    public void setBroj(Integer broj) {
+        this.broj = broj;
+    }
+
     
 
    
@@ -109,12 +118,12 @@ public class Igrac extends Entitet{
     }
     
     public String getImePrezime(){
-        return getIme() + " " + getPrezime();
+        return getIme() + " " + getPrezime() + " " + getBroj();
     }
 
     @Override
     public String toString() {
-        return  ime + " " + prezime + "-" + "("+  klub + ")";
+        return  ime + " " + prezime + "(" + broj + ")" + "-" + "*"+  klub + "*";
     }
 
   

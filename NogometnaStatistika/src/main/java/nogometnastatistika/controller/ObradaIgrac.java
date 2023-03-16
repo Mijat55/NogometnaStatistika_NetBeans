@@ -23,6 +23,18 @@ public class ObradaIgrac extends Obrada<Igrac>{
         return session.createQuery("from Igrac", Igrac.class).list();
        
     }
+     public List<Igrac> read(String uvjet) {
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+       return session.createQuery("from Igrac "
+               + " where concat(ime,' ',prezime,' ',broj,' ',ime) "
+               + " like :uvjet "
+               + " order by prezime, ime, broj ", 
+               Igrac.class)
+               .setParameter("uvjet", uvjet)
+               .setMaxResults(30)
+               .list();
+    }
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {

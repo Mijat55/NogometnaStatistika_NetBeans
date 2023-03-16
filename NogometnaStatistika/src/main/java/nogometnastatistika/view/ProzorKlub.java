@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import nogometnastatistika.controller.ObradaKlubEntitet;
+
 import nogometnastatistika.controller.ObradaKlub;
 import nogometnastatistika.model.Klub;
 import nogometnastatistika.util.Aplikacija;
@@ -156,7 +156,9 @@ private void ucitaj(){
            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite klub :)");
            return;
        }
-       
+        if(JOptionPane.showConfirmDialog(getRootPane(),"Sigurno promjeniti 👀" + " " + obrada.getEntitet().getNaziv() +" " + "?" + " ","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;}
        napuniModel();
         try {
             obrada.update();
@@ -170,7 +172,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite klub");
           return;
       }
-      if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getNaziv() +" " + "?","Brisanje"
+      if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getNaziv() +" " + "?" +" "+"😱","Brisanje"
               ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
           return;
       }

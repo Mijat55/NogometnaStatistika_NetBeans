@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.util;
 
+import java.net.URL;
 import nogometnastatistika.model.Operater;
 
 /**
@@ -13,4 +14,5 @@ import nogometnastatistika.model.Operater;
 public class Aplikacija {
        public static final String NAZIV_APP="Nogometna Statistika";
     public static Operater OPERATER;
+    
 }

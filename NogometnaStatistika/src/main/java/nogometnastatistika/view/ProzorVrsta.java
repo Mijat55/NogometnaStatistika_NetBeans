@@ -162,6 +162,9 @@ private ObradaVrsta obrada;
            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite vrstu :)");
            return;
        }
+       if(JOptionPane.showConfirmDialog(getRootPane(),"Sigurno promjeniti 👀" + " " + obrada.getEntitet().getNaziv() +" " + "?" + " ","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;}
        
        napuniModel();
         try {
@@ -176,7 +179,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite vrstu");
           return;
       }
-             if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getNaziv()+" " + "?","Brisanje"
+             if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + " " + obrada.getEntitet().getNaziv()+" " + "?"+"😱","Brisanje"
               ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
           return;
       }

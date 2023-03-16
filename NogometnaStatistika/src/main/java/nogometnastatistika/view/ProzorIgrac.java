@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -38,7 +39,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
     }
     private void ucitaj(){
         DefaultListModel<Igrac> m = new DefaultListModel<>();
-    m.addAll(obrada.read());
+    m.addAll(obrada.read(txtUvjet.getText()));
     lstPodaci.setModel(m);
     lstPodaci.repaint();
     
@@ -72,6 +73,10 @@ public class ProzorIgrac extends javax.swing.JFrame {
         btnPromjeni = new javax.swing.JButton();
         btnDodaj = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtBrojIgraca = new javax.swing.JTextField();
+        txtUvjet = new javax.swing.JTextField();
+        btnTrazi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,10 +118,30 @@ public class ProzorIgrac extends javax.swing.JFrame {
             }
         });
 
-        btnObrisi.setText("Obriši");
+        btnObrisi.setText("Obriši ");
         btnObrisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObrisiActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("~Broj Igrača~");
+
+        txtUvjet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUvjetActionPerformed(evt);
+            }
+        });
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
+
+        btnTrazi.setText("🔍");
+        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziActionPerformed(evt);
             }
         });
 
@@ -125,8 +150,13 @@ public class ProzorIgrac extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,16 +177,21 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPromjeni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnObrisi)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(btnObrisi))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBrojIgraca))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTrazi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,13 +218,17 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtKlubIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBrojIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
                             .addComponent(btnPromjeni)
                             .addComponent(btnObrisi)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -201,7 +240,9 @@ public class ProzorIgrac extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite igrača :)");
            return;
        }
-       
+       if(JOptionPane.showConfirmDialog(getRootPane(),"Sigurno promjeniti 👀" + " " + obrada.getEntitet().getImePrezime()+" " + "?" + " ","Brisanje"
+              ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+          return;}
        napuniModel();
         try {
             obrada.update();
@@ -238,7 +279,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite igrača");
           return;
       }
-          if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + obrada.getEntitet().getImePrezime()+ "?","Brisanje"
+          if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati" + obrada.getEntitet().getImePrezime()+ "?"+"😱","Brisanje"
               ,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
           return;
       }
@@ -248,12 +289,27 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
         } catch (NogometnaStatistikaException ex) {
 JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void txtUvjetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUvjetActionPerformed
+       
+    }//GEN-LAST:event_txtUvjetActionPerformed
+
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            ucitaj();
+        }
+    }//GEN-LAST:event_txtUvjetKeyPressed
+
+    private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
+       ucitaj();
+    }//GEN-LAST:event_btnTraziActionPerformed
 private void napuniView(){
     var i = obrada.getEntitet();
     txtIme.setText(i.getIme());
     txtPrezime.setText(i.getPrezime());
     txtOib.setText(i.getOib());
     txtPozicija.setText(i.getPozicija());
+    txtBrojIgraca.setText(String.valueOf(i.getBroj()));
     //txtDatumRodjenja.setText(i.getDatumRodjenja());
     txtTrenutnaVrijednost.setText(df.format(i.getTrenutnaVrijednost()));
     //txtKlubIgraca.setText(i.getKlub());
@@ -266,6 +322,11 @@ private void napuniView(){
     i.setIme(txtIme.getText());
     i.setPrezime(txtPrezime.getText());
     i.setPozicija(txtPozicija.getText());
+     try {
+       i.setBroj(Integer.parseInt(txtBrojIgraca.getText()));
+     } catch (Exception e) {
+         i.setBroj( 0);
+     }
    // i.setDatumRodjenja(datumRodjenja);
    //i.setOib(oib);
   // i.setKlub(klub);
@@ -282,6 +343,7 @@ private void napuniView(){
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JButton btnTrazi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -289,8 +351,10 @@ private void napuniView(){
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Igrac> lstPodaci;
+    private javax.swing.JTextField txtBrojIgraca;
     private javax.swing.JTextField txtDatumRodjenja;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtKlubIgraca;
@@ -298,5 +362,6 @@ private void napuniView(){
     private javax.swing.JTextField txtPozicija;
     private javax.swing.JTextField txtPrezime;
     private javax.swing.JTextField txtTrenutnaVrijednost;
+    private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
 }

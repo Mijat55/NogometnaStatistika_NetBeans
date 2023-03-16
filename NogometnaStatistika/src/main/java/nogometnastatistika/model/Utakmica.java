@@ -16,12 +16,12 @@ import java.util.List;
 public class Utakmica extends Entitet{
     @ManyToOne
     @JoinColumn(
-    name = "domaci_klub_sifra")
+    name = "domaci_sifra")
     
         private Klub domaciKlub;
     @ManyToOne
     @JoinColumn(
-    name = "gosti_klub_sifra")
+    name = "gosti_sifra")
     
         private Klub gostiKlub;
     @Column(
@@ -29,8 +29,7 @@ public class Utakmica extends Entitet{
     columnDefinition ="datetime")
 	private Date vrijemePocetka;
     @Column(
-    name = "maksimalan_broj_navijaca",
-    columnDefinition = "decimal(38,2)")
+    name = "maksimalan_broj_navijaca")
 	private Integer maksimalanBrojNavijaca;
     @Column(
     columnDefinition = "varchar(30)")

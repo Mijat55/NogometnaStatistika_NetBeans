@@ -63,7 +63,7 @@ public class Dogadjaj extends Entitet{
     }
     @Override
     public String toString() {
-        return igrac + " " +"*"+ " " + utakmica + " "+"*"+" " + vrsta + " "+"~"+" " + minuta + " " +"minuta";
+        return igrac + " " +"("+ " " + vrsta + " "+")"+" " + minuta +"'"+" "+"minuta" +" "+"*"+" " + utakmica + " " +"*";
     }
         
         

@@ -6,6 +6,7 @@ package nogometnastatistika.view;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import nogometnastatistika.controller.ObradaOperater;
 import nogometnastatistika.model.Operater;
 import nogometnastatistika.util.Aplikacija;
@@ -22,10 +23,13 @@ private ObradaOperater obrada;
     public ProzorLogin() {
         initComponents();
         obrada = new ObradaOperater();
-      // setIcon();
         setTitle(Aplikacija.NAZIV_APP + " Login");
     }
     
+
+    
+
+
     private void login (){
         lblPoruka.setText("");
         if(txtEmail.getText().isEmpty()){
@@ -48,6 +52,7 @@ private ObradaOperater obrada;
         dispose();
                 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

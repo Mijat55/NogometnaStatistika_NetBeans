@@ -21,7 +21,7 @@ public class NogometnaStatistika {
     public static void main(String[] args) {
   new SplashScreen().setVisible(true);
             
-       // HibernateUtil.getSession();
+       //HibernateUtil.getSession();
             
             
             
