@@ -5,9 +5,12 @@
 package nogometnastatistika.view;
 
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import nogometnastatistika.controller.ObradaKlub;
 import nogometnastatistika.controller.ObradaUtakmica;
+import nogometnastatistika.model.Klub;
 import nogometnastatistika.model.Utakmica;
 import nogometnastatistika.util.Aplikacija;
 import nogometnastatistika.util.NogometnaStatistikaException;
@@ -27,6 +30,8 @@ private ObradaUtakmica obrada;
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
                 ": Klubovi");
+        ucitajDomaceKlubove();
+        ucitajGostujuceKlubove();
         ucitaj();
     }
    private void ucitaj(){
@@ -37,6 +42,30 @@ private ObradaUtakmica obrada;
     lstPodaci.repaint();
     
 }
+    private void ucitajDomaceKlubove(){
+        DefaultComboBoxModel<Klub> m
+                = new DefaultComboBoxModel<>();
+        Klub k = new Klub();
+        k.setSifra(0);
+        k.setNaziv("Nije odabrano");
+        m.addElement(k);
+        m.addAll(new ObradaKlub().read());
+        cmbDomaciKlub.setModel(m);
+        cmbDomaciKlub.repaint();
+        
+    }
+     private void ucitajGostujuceKlubove(){
+        DefaultComboBoxModel<Klub> m
+                = new DefaultComboBoxModel<>();
+        Klub k = new Klub();
+        k.setSifra(0);
+        k.setNaziv("Nije odabrano");
+        m.addElement(k);
+        m.addAll(new ObradaKlub().read());
+        cmbGostiKlub.setModel(m);
+        cmbGostiKlub.repaint();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,9 +78,7 @@ private ObradaUtakmica obrada;
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        txtDomaciKlub = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtGostiKlub = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtVrijemePocetka = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -61,6 +88,8 @@ private ObradaUtakmica obrada;
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        cmbDomaciKlub = new javax.swing.JComboBox<>();
+        cmbGostiKlub = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,8 +156,8 @@ private ObradaUtakmica obrada;
                     .addComponent(txtStadion)
                     .addComponent(txtBrojNavijaca)
                     .addComponent(txtVrijemePocetka)
-                    .addComponent(txtGostiKlub)
-                    .addComponent(txtDomaciKlub))
+                    .addComponent(cmbDomaciKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbGostiKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,11 +168,11 @@ private ObradaUtakmica obrada;
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtDomaciKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDomaciKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGostiKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbGostiKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -225,8 +254,8 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     }//GEN-LAST:event_btnObrisiActionPerformed
  private void napuniView(){
     var u = obrada.getEntitet();
-    //txtDomaciKlub.setText(u.getDomaciKlub());
-    //txtGostiKlub.setText(u.getGostiKlub());
+    cmbDomaciKlub.setSelectedItem(u.getDomaciKlub());
+    cmbGostiKlub.setSelectedItem(u.getGostiKlub());
     txtBrojNavijaca.setText(String.valueOf(u.getMaksimalanBrojNavijaca()));
     //txtVrijemePocetka.setText(u.getVrijemePocetka());
     txtStadion.setText(u.getStadion());
@@ -252,6 +281,8 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private javax.swing.JComboBox<Klub> cmbDomaciKlub;
+    private javax.swing.JComboBox<Klub> cmbGostiKlub;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -260,8 +291,6 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Utakmica> lstPodaci;
     private javax.swing.JTextField txtBrojNavijaca;
-    private javax.swing.JTextField txtDomaciKlub;
-    private javax.swing.JTextField txtGostiKlub;
     private javax.swing.JTextField txtStadion;
     private javax.swing.JTextField txtVrijemePocetka;
     // End of variables declaration//GEN-END:variables

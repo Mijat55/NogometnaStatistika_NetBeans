@@ -42,6 +42,9 @@ public class ObradaIgrac extends Obrada<Igrac>{
         kontrolaPrezime();
         kontrolaTrenutnaVrijednost();
         kontrolaOib();
+        if(entitet.getKlub().getSifra()==0){
+           throw new NogometnaStatistikaException("Obavezno odabir Kluba");
+       }
     }
 
     @Override

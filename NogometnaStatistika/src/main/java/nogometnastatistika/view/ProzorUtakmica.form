@@ -42,8 +42,8 @@
                   <Component id="txtStadion" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtBrojNavijaca" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtVrijemePocetka" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtGostiKlub" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtDomaciKlub" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cmbDomaciKlub" max="32767" attributes="0"/>
+                  <Component id="cmbGostiKlub" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
           </Group>
@@ -57,11 +57,11 @@
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="txtDomaciKlub" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmbDomaciKlub" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtGostiKlub" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="cmbGostiKlub" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -117,14 +117,10 @@
         <Property name="text" type="java.lang.String" value="~Doma&#x107;i Klub~"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtDomaciKlub">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="~Gostuju&#x107;i Klub~"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtGostiKlub">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -173,6 +169,26 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrisiActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbDomaciKlub">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Klub&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbGostiKlub">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Klub&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

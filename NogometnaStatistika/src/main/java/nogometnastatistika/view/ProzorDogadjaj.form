@@ -33,11 +33,11 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cmbIgraci" min="-2" pref="227" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="100" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="btnDodaj" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -45,10 +45,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnObrisi" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="txtMinuta" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtVrstaDogadjaj" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtUtakmicaDogadjaj" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtIgračDogadjaj" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cmbUtakmice" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
+                  <Component id="cmbVrste" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="txtMinuta" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
           </Group>
@@ -59,38 +61,38 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtUvjet" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="txtIgračDogadjaj" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmbIgraci" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtUtakmicaDogadjaj" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="cmbUtakmice" min="-2" pref="28" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtVrstaDogadjaj" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmbVrste" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtMinuta" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPromjeni" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="256" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,21 +126,15 @@
         <Property name="text" type="java.lang.String" value="~Unos Igra&#x10d;a~"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtIgra&#x10d;Dogadjaj">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="~Unos Utakmice~"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtUtakmicaDogadjaj">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="~Unos Vrste~"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtVrstaDogadjaj">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -146,6 +142,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMinuta">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMinutaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDodaj">
       <Properties>
@@ -184,6 +183,36 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTraziActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbIgraci">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Igrac&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbUtakmice">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Utakmica&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbVrste">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Vrsta&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

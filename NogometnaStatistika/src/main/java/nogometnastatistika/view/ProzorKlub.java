@@ -134,6 +134,7 @@ private void ucitaj(){
        napuniModel();
         try {
             obrada.create();
+           
             ucitaj();
         } catch (NogometnaStatistikaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }

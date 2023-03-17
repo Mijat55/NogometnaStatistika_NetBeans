@@ -6,10 +6,17 @@ package nogometnastatistika.view;
 
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import nogometnastatistika.controller.ObradaDogadjaj;
+import nogometnastatistika.controller.ObradaIgrac;
+import nogometnastatistika.controller.ObradaUtakmica;
+import nogometnastatistika.controller.ObradaVrsta;
 import nogometnastatistika.model.Dogadjaj;
+import nogometnastatistika.model.Igrac;
+import nogometnastatistika.model.Utakmica;
+import nogometnastatistika.model.Vrsta;
 import nogometnastatistika.util.Aplikacija;
 import nogometnastatistika.util.NogometnaStatistikaException;
 
@@ -28,6 +35,9 @@ private ObradaDogadjaj obrada;
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
                 ": Klubovi");
+        ucitajIgrace();
+        ucitajUtakmice();
+        ucitajVrste();
         ucitaj();
     }
          private void ucitaj(){
@@ -38,6 +48,43 @@ private ObradaDogadjaj obrada;
     lstPodaci.repaint();
     
 }
+         private void ucitajIgrace(){
+             DefaultComboBoxModel<Igrac> m
+                = new DefaultComboBoxModel<>();
+        Igrac i = new Igrac();
+        i.setSifra(0);
+        i.setIme("Nije");
+        i.setPrezime("odabrano");
+        m.addElement(i);
+        m.addAll(new ObradaIgrac().read());
+        cmbIgraci.setModel(m);
+        cmbIgraci.repaint();
+        
+    }
+        private void ucitajUtakmice(){
+        DefaultComboBoxModel<Utakmica> m
+        = new DefaultComboBoxModel<>();
+        Utakmica u = new Utakmica();
+        u.setSifra(0);
+        u.getDomaciGosti();
+        m.addElement(u);
+        m.addAll(new ObradaUtakmica().read());
+        cmbUtakmice.setModel(m);
+        cmbUtakmice.repaint();
+        
+    }
+        private void ucitajVrste(){
+        DefaultComboBoxModel<Vrsta> m
+        = new DefaultComboBoxModel<>();
+        Vrsta v = new Vrsta();
+        v.setSifra(0);
+        v.setNaziv("Nije odabrano");
+        m.addElement(v);
+        m.addAll(new ObradaVrsta().read());
+        cmbVrste.setModel(m);
+        cmbVrste.repaint();
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,11 +98,8 @@ private ObradaDogadjaj obrada;
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        txtIgračDogadjaj = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtUtakmicaDogadjaj = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtVrstaDogadjaj = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtMinuta = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
@@ -63,6 +107,9 @@ private ObradaDogadjaj obrada;
         btnObrisi = new javax.swing.JButton();
         txtUvjet = new javax.swing.JTextField();
         btnTrazi = new javax.swing.JButton();
+        cmbIgraci = new javax.swing.JComboBox<>();
+        cmbUtakmice = new javax.swing.JComboBox<>();
+        cmbVrste = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,6 +128,12 @@ private ObradaDogadjaj obrada;
         jLabel3.setText("~Unos Vrste~");
 
         jLabel4.setText("~Minuta Događaja~");
+
+        txtMinuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMinutaActionPerformed(evt);
+            }
+        });
 
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -133,21 +186,22 @@ private ObradaDogadjaj obrada;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbIgraci, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDodaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPromjeni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnObrisi))
-                    .addComponent(txtMinuta)
-                    .addComponent(txtVrstaDogadjaj)
-                    .addComponent(txtUtakmicaDogadjaj)
-                    .addComponent(txtIgračDogadjaj))
+                    .addComponent(cmbUtakmice, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtMinuta, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -158,30 +212,30 @@ private ObradaDogadjaj obrada;
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnTrazi))
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtIgračDogadjaj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbIgraci, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUtakmicaDogadjaj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbUtakmice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtVrstaDogadjaj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
                             .addComponent(btnPromjeni)
                             .addComponent(btnObrisi)))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,6 +247,7 @@ private ObradaDogadjaj obrada;
        napuniModel();
         try {
             obrada.create();
+            txtUvjet.setText(obrada.getEntitet().getIgracVrstaMinutaUtakmica());
             ucitaj();
         } catch (NogometnaStatistikaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka()); }
@@ -221,6 +276,7 @@ private ObradaDogadjaj obrada;
        napuniModel();
         try {
             obrada.update();
+            txtUvjet.setText(obrada.getEntitet().getIgracVrstaMinutaUtakmica());
             ucitaj();
         } catch (NogometnaStatistikaException ex) {
 JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
@@ -256,12 +312,17 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
         ucitaj();
     }//GEN-LAST:event_btnTraziActionPerformed
+
+    private void txtMinutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMinutaActionPerformed
  private void napuniView(){
     var d = obrada.getEntitet();
     txtMinuta.setText(String.valueOf(d.getMinuta()));
-    //txtUtakmicaDogadjaj.setText(d.getUtakmica());
-    //txtIgračDogadjaj.setText(d.getIgrac());
-    //txtVrstaDogadjaj.setText(d.getVrsta());
+    cmbIgraci.setSelectedItem(d.getIgrac());
+    cmbUtakmice.setSelectedItem(d.getUtakmica());
+    cmbVrste.setSelectedItem(d.getVrsta());
+            
     
 }
     
@@ -270,9 +331,9 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private void napuniModel(){
     var d = obrada.getEntitet();
     
-    //d.setUtakmica(utakmica);
-    //d.setIgrac(igrac);
-    //d.setVrsta(vrsta);
+    //d.getUtakmica();
+    //d.getIgrac();
+    //d.getVrsta();
    
           try {
        d.setMinuta(Integer.parseInt(txtMinuta.getText()));
@@ -289,16 +350,16 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
+    private javax.swing.JComboBox<Igrac> cmbIgraci;
+    private javax.swing.JComboBox<Utakmica> cmbUtakmice;
+    private javax.swing.JComboBox<Vrsta> cmbVrste;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Dogadjaj> lstPodaci;
-    private javax.swing.JTextField txtIgračDogadjaj;
     private javax.swing.JTextField txtMinuta;
-    private javax.swing.JTextField txtUtakmicaDogadjaj;
     private javax.swing.JTextField txtUvjet;
-    private javax.swing.JTextField txtVrstaDogadjaj;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,7 +22,13 @@ public class ObradaUtakmica extends Obrada<Utakmica>{
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {
-       
+       // postaviti kontrolu pri unosu da domaci klub ne moze biti isti kao gostujuci klub!!
+       if(entitet.getDomaciKlub().getSifra()==0){
+           throw new NogometnaStatistikaException("Obavezno odabir Domaćeg Kluba");
+       }
+        if(entitet.getGostiKlub().getSifra()==0){
+           throw new NogometnaStatistikaException("Obavezno odabir Gostujućeg Kluba");
+       }
     }
 
     @Override
