@@ -21,6 +21,7 @@ private ObradaVrsta obrada;
      * Creates new form ProzorVrsta
      */
     public ProzorVrsta() {
+//setIcon();
         initComponents();
              obrada = new ObradaVrsta();
         setTitle(Aplikacija.NAZIV_APP + ": " + 
