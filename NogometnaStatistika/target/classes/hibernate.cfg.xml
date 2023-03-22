@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC 
-  "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
-  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-<!-- Version 8 MySQL hiberante-cfg.xml example for Hibernate 5 -->
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+
+
+
+
+
 <hibernate-configuration>
   <session-factory>
     <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
@@ -20,6 +27,7 @@
    <mapping class="nogometnastatistika.model.Igrac" />
    <mapping class="nogometnastatistika.model.Vrsta" />
    <mapping class="nogometnastatistika.model.Dogadjaj" />
+   <mapping class="nogometnastatistika.model.Operater" />
    
   </session-factory>
 </hibernate-configuration>

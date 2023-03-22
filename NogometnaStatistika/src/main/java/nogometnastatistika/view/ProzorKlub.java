@@ -26,7 +26,6 @@ public class ProzorKlub extends javax.swing.JFrame {
      * Creates new form ProzorKlub
      */
     public ProzorKlub() {
-        //iconImage();
         initComponents();
         setIcon();
         obrada = new ObradaKlub();
