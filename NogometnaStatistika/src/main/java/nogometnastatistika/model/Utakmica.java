@@ -90,6 +90,9 @@ public String getDomaciGosti(){
     }
     @Override
     public String toString() {
+        if(domaciKlub ==null || gostiKlub ==null){
+            return stadion;
+        }
         return domaciKlub + " " + "vs" + " " + gostiKlub;
                 
     }

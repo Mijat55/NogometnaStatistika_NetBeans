@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.Toolkit;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -21,15 +22,17 @@ import nogometnastatistika.util.NogometnaStatistikaException;
  */
 public class ProzorUtakmica extends javax.swing.JFrame {
 private ObradaUtakmica obrada;
+
     /**
      * Creates new form ProzorUtakmica
      */
     public ProzorUtakmica() {
         initComponents();
+        setIcon();
            obrada = new ObradaUtakmica();
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
-                ": Klubovi");
+                ": Utakmice");
         ucitajDomaceKlubove();
         ucitajGostujuceKlubove();
         ucitaj();
@@ -265,8 +268,8 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     
     private void napuniModel(){
     var u = obrada.getEntitet();
-   // u.setDomaciKlub(txtDomaciKlub.getText());
-   // u.setGostiKlub
+   u.setDomaciKlub((Klub)cmbDomaciKlub.getSelectedItem());
+   u.setGostiKlub((Klub)cmbGostiKlub.getSelectedItem());
    // u.setVrijemePocetka
      try {
        u.setMaksimalanBrojNavijaca(Integer.parseInt(txtBrojNavijaca.getText()));
@@ -294,4 +297,9 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JTextField txtStadion;
     private javax.swing.JTextField txtVrijemePocetka;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
+
+    }
 }

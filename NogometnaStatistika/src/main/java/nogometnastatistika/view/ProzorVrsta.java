@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import nogometnastatistika.controller.ObradaVrsta;
@@ -21,6 +22,7 @@ private ObradaVrsta obrada;
      * Creates new form ProzorVrsta
      */
     public ProzorVrsta() {
+        setIcon();
         initComponents();
              obrada = new ObradaVrsta();
         setTitle(Aplikacija.NAZIV_APP + ": " + 
@@ -215,4 +217,8 @@ private void napuniView(){
     private javax.swing.JList<Vrsta> lstPodaci;
     private javax.swing.JTextField txtNazivVrsta;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
+    }
 }

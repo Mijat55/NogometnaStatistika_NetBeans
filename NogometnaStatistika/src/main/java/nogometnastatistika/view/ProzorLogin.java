@@ -22,6 +22,7 @@ private ObradaOperater obrada;
      */
     public ProzorLogin() {
         initComponents();
+        setIcon();
         obrada = new ObradaOperater();
         setTitle(Aplikacija.NAZIV_APP + " Login");
     }
@@ -216,10 +217,10 @@ private ObradaOperater obrada;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 
-   // private void setIcon() {
+    private void setIcon() {
         
   
-//setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ball.png" )));
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
 
-//}
+    }
 }

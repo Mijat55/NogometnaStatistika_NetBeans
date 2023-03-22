@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import nogometnastatistika.model.Igrac;
+import nogometnastatistika.model.Klub;
 import nogometnastatistika.util.Alati;
 import nogometnastatistika.util.NogometnaStatistikaException;
 
@@ -23,6 +24,10 @@ public class ObradaIgrac extends Obrada<Igrac>{
         return session.createQuery("from Igrac", Igrac.class).list();
        
     }
+      public List<Igrac> read(Klub k) {
+       return session.createQuery("from Igrac" + " where klub=:klub",
+              Igrac.class).setParameter("klub", k).list();
+   }
      public List<Igrac> read(String uvjet) {
         uvjet=uvjet.trim();
         uvjet = "%" + uvjet + "%";

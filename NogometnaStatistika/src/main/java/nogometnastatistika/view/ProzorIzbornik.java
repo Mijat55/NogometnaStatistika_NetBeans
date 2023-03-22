@@ -24,6 +24,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
      */
     public ProzorIzbornik() {
         initComponents();
+        setIcon();
     
         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime());
      pokreniSat();
@@ -32,6 +33,10 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     
     private void pokreniSat(){
         new Vrijeme().start();
+    }
+
+    private void setIcon() {
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
     }
       
  private class Vrijeme extends Thread{

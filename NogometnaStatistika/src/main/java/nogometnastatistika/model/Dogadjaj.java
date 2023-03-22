@@ -59,11 +59,12 @@ public class Dogadjaj extends Entitet{
     }
 
     public String getIgracVrstaMinutaUtakmica(){
-        return getIgrac()+ " " + getVrsta() + " " + getMinuta() + " " + getUtakmica();
+       return getIgrac()+ " " + getVrsta() + " " + getMinuta() + " " + getUtakmica();
     }
     @Override
     public String toString() {
         return igrac + " " +"("+ " " + vrsta + " "+")"+" " + minuta +"'"+" "+"minuta" +" "+"*"+" " + utakmica + " " +"*";
+        
     }
         
         

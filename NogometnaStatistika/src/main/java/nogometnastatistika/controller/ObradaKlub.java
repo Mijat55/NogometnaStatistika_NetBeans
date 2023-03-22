@@ -5,6 +5,7 @@
 package nogometnastatistika.controller;
 
 import java.util.List;
+import nogometnastatistika.model.Igrac;
 import nogometnastatistika.model.Klub;
 import nogometnastatistika.util.Alati;
 import nogometnastatistika.util.NogometnaStatistikaException;
@@ -19,6 +20,7 @@ public class ObradaKlub extends Obrada<Klub>{
     public List<Klub> read() {
         return session.createQuery("from Klub", Klub.class).list();
     }
+   
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {

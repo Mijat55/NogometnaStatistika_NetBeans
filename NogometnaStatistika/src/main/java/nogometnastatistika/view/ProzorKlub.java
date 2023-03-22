@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -26,6 +27,7 @@ public class ProzorKlub extends javax.swing.JFrame {
      */
     public ProzorKlub() {
         initComponents();
+        setIcon();
         obrada = new ObradaKlub();
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
@@ -206,4 +208,8 @@ private void napuniView(){
     private javax.swing.JList<Klub> lstPodaci;
     private javax.swing.JTextField txtNaziv;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
+    }
 }

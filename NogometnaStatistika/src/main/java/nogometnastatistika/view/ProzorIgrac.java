@@ -4,6 +4,7 @@
  */
 package nogometnastatistika.view;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -31,6 +32,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
      */
     public ProzorIgrac() {
         initComponents();
+        setIcon();
          obrada = new ObradaIgrac();
          DecimalFormatSymbols dfs = new DecimalFormatSymbols(new Locale("hr", "HR"));
          df = new DecimalFormat("###,##0.00",dfs);
@@ -406,4 +408,8 @@ private void napuniView(){
     private javax.swing.JTextField txtTrenutnaVrijednost;
     private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
+    }
 }

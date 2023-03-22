@@ -6,6 +6,8 @@ package nogometnastatistika.controller;
 
 import java.util.List;
 import nogometnastatistika.model.Dogadjaj;
+import nogometnastatistika.model.Klub;
+import nogometnastatistika.model.Utakmica;
 import nogometnastatistika.util.NogometnaStatistikaException;
 
 /**
@@ -18,17 +20,23 @@ public class ObradaDogadjaj extends Obrada<Dogadjaj>{
     public List<Dogadjaj> read() {
         return session.createQuery("from Dogadjaj", Dogadjaj.class).list();
     }
+  public List<Dogadjaj> read(Utakmica u) {
+       return session.createQuery("from Dogadjaj" + " where utakmica=:utakmica",
+              Dogadjaj.class).setParameter("utakmica", u).list();
+   }
+   
+   
     public List<Dogadjaj> read(String uvjet) {
-        uvjet=uvjet.trim();
-        uvjet = "%" + uvjet + "%";
-       return session.createQuery("from Dogadjaj "
-               + " where concat(igrac.ime, igrac.prezime, igrac.broj, vrsta.naziv, vrsta.gol, utakmica.domaciKlub.naziv, utakmica.gostiKlub.naziv ) "
-               + " like :uvjet "
-               + " order by igrac, vrsta, minuta, utakmica ", 
-               Dogadjaj.class)
-               .setParameter("uvjet", uvjet)
-               .setMaxResults(30)
-               .list();
+       uvjet=uvjet.trim();
+       uvjet = "%" + uvjet + "%";
+      return session.createQuery("from Dogadjaj "
+            + " where concat(igrac.ime, igrac.prezime, igrac.broj, vrsta.naziv, vrsta.gol, utakmica.domaciKlub.naziv, utakmica.gostiKlub.naziv ) "
+            + " like :uvjet "
+            + " order by igrac, vrsta, minuta, utakmica ", 
+             Dogadjaj.class)
+             .setParameter("uvjet", uvjet)
+             .setMaxResults(30)
+             .list();
     }
 
     @Override
