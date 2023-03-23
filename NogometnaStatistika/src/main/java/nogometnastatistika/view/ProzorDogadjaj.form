@@ -53,19 +53,19 @@
                   <Component id="jLabel1" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane2" min="-2" pref="200" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="cmbFilterKlub" max="32767" attributes="0"/>
+                      <Component id="cmbFilterKlub" min="-2" pref="78" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnTrazi1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTraziKlub" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtTraziIgraca" min="-2" pref="64" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnTrazi2" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="84" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,7 +81,7 @@
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cmbFilterKlub" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnTrazi1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTraziKlub" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTraziIgraca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTrazi2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -274,15 +274,18 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Klub&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnTrazi1">
+    <Component class="javax.swing.JButton" name="btnTraziKlub">
       <Properties>
         <Property name="text" type="java.lang.String" value="\ud83d\udd0d" containsInvalidXMLChars="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrazi1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTraziKlubActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTraziIgraca">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTraziIgracaKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTrazi2">
       <Properties>
@@ -290,6 +293,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrazi2ActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnTrazi2KeyPressed"/>
       </Events>
     </Component>
   </SubComponents>

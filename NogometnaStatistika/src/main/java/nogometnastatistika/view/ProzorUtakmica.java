@@ -4,8 +4,16 @@
  */
 package nogometnastatistika.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.awt.Toolkit;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.OffsetTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -33,6 +41,7 @@ private ObradaUtakmica obrada;
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
                 ": Utakmice");
+        definirajDatumPocetka();
         ucitajDomaceKlubove();
         ucitajGostujuceKlubove();
         ucitaj();
@@ -83,7 +92,6 @@ private ObradaUtakmica obrada;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtVrijemePocetka = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtBrojNavijaca = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -93,6 +101,7 @@ private ObradaUtakmica obrada;
         btnObrisi = new javax.swing.JButton();
         cmbDomaciKlub = new javax.swing.JComboBox<>();
         cmbGostiKlub = new javax.swing.JComboBox<>();
+        dpDatumPocetka = new com.github.lgooddatepicker.components.DateTimePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -156,11 +165,12 @@ private ObradaUtakmica obrada;
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(txtStadion)
-                    .addComponent(txtBrojNavijaca)
-                    .addComponent(txtVrijemePocetka)
                     .addComponent(cmbDomaciKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbGostiKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbGostiKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpDatumPocetka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtBrojNavijaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(txtStadion, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -178,8 +188,8 @@ private ObradaUtakmica obrada;
                         .addComponent(cmbGostiKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtVrijemePocetka, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(dpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +270,10 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     cmbDomaciKlub.setSelectedItem(u.getDomaciKlub());
     cmbGostiKlub.setSelectedItem(u.getGostiKlub());
     txtBrojNavijaca.setText(String.valueOf(u.getMaksimalanBrojNavijaca()));
-    //txtVrijemePocetka.setText(u.getVrijemePocetka());
+    LocalDate ld = u.getVrijemePocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    dpDatumPocetka.datePicker.setDate(ld);
+    LocalTime lt = u.getVrijemePocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+    dpDatumPocetka.timePicker.setTime(lt);
     txtStadion.setText(u.getStadion());
 }
     
@@ -270,7 +283,16 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     var u = obrada.getEntitet();
    u.setDomaciKlub((Klub)cmbDomaciKlub.getSelectedItem());
    u.setGostiKlub((Klub)cmbGostiKlub.getSelectedItem());
-   // u.setVrijemePocetka
+   //u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate();
+   u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate()!=null? 
+   Date.from(dpDatumPocetka.datePicker.getDate()
+   .atStartOfDay().atZone(ZoneId.systemDefault())
+   .toInstant()): null);
+  // u.setVrijemePocetka(dpDatumPocetka.timePicker.getTime()!=null? 
+  // Date.from(dpDatumPocetka.timePicker.getTime()
+   //.atDate(LocalDate.MAX)
+   //.toInstant()): null);
+  
      try {
        u.setMaksimalanBrojNavijaca(Integer.parseInt(txtBrojNavijaca.getText()));
      } catch (Exception e) {
@@ -286,6 +308,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JComboBox<Klub> cmbDomaciKlub;
     private javax.swing.JComboBox<Klub> cmbGostiKlub;
+    private com.github.lgooddatepicker.components.DateTimePicker dpDatumPocetka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -295,11 +318,17 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JList<Utakmica> lstPodaci;
     private javax.swing.JTextField txtBrojNavijaca;
     private javax.swing.JTextField txtStadion;
-    private javax.swing.JTextField txtVrijemePocetka;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
 
+    }
+
+    private void definirajDatumPocetka() {
+        DatePickerSettings dps = new DatePickerSettings(new Locale("hr", "HR"));
+        dps.setFormatForDatesCommonEra("dd. MM. YYY. ");
+        dps.setTranslationClear("Očisti");
+       dpDatumPocetka.datePicker.setSettings(dps);
     }
 }

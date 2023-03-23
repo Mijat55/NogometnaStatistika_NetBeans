@@ -39,11 +39,13 @@
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtStadion" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtBrojNavijaca" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtVrijemePocetka" alignment="0" max="32767" attributes="0"/>
                   <Component id="cmbDomaciKlub" max="32767" attributes="0"/>
                   <Component id="cmbGostiKlub" max="32767" attributes="0"/>
+                  <Component id="dpDatumPocetka" max="32767" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="txtBrojNavijaca" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="txtStadion" alignment="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
           </Group>
@@ -64,8 +66,8 @@
                       <Component id="cmbGostiKlub" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtVrijemePocetka" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="dpDatumPocetka" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -127,8 +129,6 @@
         <Property name="text" type="java.lang.String" value="~Datum i vrijeme po&#x10d;etka ~"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtVrijemePocetka">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="~Broj navija&#x10d;a ~"/>
@@ -189,6 +189,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Klub&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dpDatumPocetka">
     </Component>
   </SubComponents>
 </Form>

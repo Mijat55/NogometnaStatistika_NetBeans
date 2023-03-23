@@ -48,6 +48,7 @@ private ObradaIgrac obradaIg;
         ucitajFilterKlub();
         ucitaj();
         ucitajIg();
+        ucitajIgraca();
     }
    private void ucitajIg(){
        DefaultListModel<Igrac> m
@@ -55,6 +56,12 @@ private ObradaIgrac obradaIg;
        m.addAll(obradaIg.read((Klub)cmbFilterKlub.getSelectedItem()));
               lstIgraciPodaci.setModel(m);
     lstIgraciPodaci.repaint();  
+   }
+   private void ucitajIgraca(){
+             DefaultListModel<Igrac> m = new DefaultListModel<>();
+    m.addAll(obradaIg.read(txtTraziIgraca.getText()));
+    lstIgraciPodaci.setModel(m);
+    lstIgraciPodaci.repaint();
    }
     
      private void ucitaj(){
@@ -149,7 +156,7 @@ cmbFilterUtakmica.setSelectedIndex(0);
         jScrollPane2 = new javax.swing.JScrollPane();
         lstIgraciPodaci = new javax.swing.JList<>();
         cmbFilterKlub = new javax.swing.JComboBox<>();
-        btnTrazi1 = new javax.swing.JButton();
+        btnTraziKlub = new javax.swing.JButton();
         txtTraziIgraca = new javax.swing.JTextField();
         btnTrazi2 = new javax.swing.JButton();
 
@@ -223,10 +230,16 @@ cmbFilterUtakmica.setSelectedIndex(0);
         });
         jScrollPane2.setViewportView(lstIgraciPodaci);
 
-        btnTrazi1.setText("🔍");
-        btnTrazi1.addActionListener(new java.awt.event.ActionListener() {
+        btnTraziKlub.setText("🔍");
+        btnTraziKlub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTrazi1ActionPerformed(evt);
+                btnTraziKlubActionPerformed(evt);
+            }
+        });
+
+        txtTraziIgraca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTraziIgracaKeyPressed(evt);
             }
         });
 
@@ -234,6 +247,11 @@ cmbFilterUtakmica.setSelectedIndex(0);
         btnTrazi2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrazi2ActionPerformed(evt);
+            }
+        });
+        btnTrazi2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnTrazi2KeyPressed(evt);
             }
         });
 
@@ -266,17 +284,17 @@ cmbFilterUtakmica.setSelectedIndex(0);
                     .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbFilterKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbFilterKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTrazi1)
+                        .addComponent(btnTraziKlub)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTraziIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTrazi2)))
-                .addGap(0, 84, Short.MAX_VALUE))
+                        .addComponent(btnTrazi2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +307,7 @@ cmbFilterUtakmica.setSelectedIndex(0);
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(cmbFilterKlub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTrazi1)
+                        .addComponent(btnTraziKlub)
                         .addComponent(txtTraziIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnTrazi2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -391,9 +409,9 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbUtakmiceActionPerformed
 
-    private void btnTrazi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazi1ActionPerformed
+    private void btnTraziKlubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziKlubActionPerformed
       ucitajIg();
-    }//GEN-LAST:event_btnTrazi1ActionPerformed
+    }//GEN-LAST:event_btnTraziKlubActionPerformed
 
     private void btnTrazi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazi2ActionPerformed
         // TODO add your handling code here:
@@ -414,6 +432,16 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private void btnTraziKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTraziKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTraziKeyPressed
+
+    private void txtTraziIgracaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziIgracaKeyPressed
+      
+            ucitajIgraca();
+        
+    }//GEN-LAST:event_txtTraziIgracaKeyPressed
+
+    private void btnTrazi2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTrazi2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTrazi2KeyPressed
  private void napuniView(){
     var d = obrada.getEntitet();
     txtMinuta.setText(String.valueOf(d.getMinuta()));
@@ -448,8 +476,8 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
-    private javax.swing.JButton btnTrazi1;
     private javax.swing.JButton btnTrazi2;
+    private javax.swing.JButton btnTraziKlub;
     private javax.swing.JComboBox<Klub> cmbFilterKlub;
     private javax.swing.JComboBox<Utakmica> cmbFilterUtakmica;
     private javax.swing.JComboBox<Igrac> cmbIgraci;

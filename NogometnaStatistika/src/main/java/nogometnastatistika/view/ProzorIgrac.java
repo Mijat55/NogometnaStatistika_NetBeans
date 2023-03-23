@@ -4,11 +4,15 @@
  */
 package nogometnastatistika.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -40,6 +44,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
                 ": Klubovi");
+        definirajDatumRodjenja();
         ucitajKlubove();
         ucitaj();
     }
@@ -82,7 +87,6 @@ public class ProzorIgrac extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtPrezime = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtDatumRodjenja = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtOib = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -99,6 +103,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
         btnTrazi = new javax.swing.JButton();
         btnDovuciOib = new javax.swing.JButton();
         cmbKlubovi = new javax.swing.JComboBox<>();
+        dpDatumRodjenja = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -186,33 +191,34 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPozicija)
-                        .addComponent(txtTrenutnaVrijednost)
-                        .addComponent(txtDatumRodjenja)
-                        .addComponent(txtPrezime)
-                        .addComponent(txtIme)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnDodaj)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnPromjeni)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnObrisi))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnDovuciOib))
-                        .addComponent(cmbKlubovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBrojIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrezime)
+                    .addComponent(txtIme)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPromjeni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisi))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDovuciOib))
+                    .addComponent(cmbKlubovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtTrenutnaVrijednost, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtBrojIgraca, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtPozicija, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -233,8 +239,8 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDatumRodjenja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(dpDatumRodjenja, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -351,7 +357,8 @@ private void napuniView(){
     txtOib.setText(i.getOib());
     txtPozicija.setText(i.getPozicija());
     txtBrojIgraca.setText(String.valueOf(i.getBroj()));
-    //txtDatumRodjenja.setText(i.getDatumRodjenja());
+    LocalDate ld = i.getDatumRodjenja().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    dpDatumRodjenja.setDate(ld);
     txtTrenutnaVrijednost.setText(df.format(i.getTrenutnaVrijednost()));
     cmbKlubovi.setSelectedItem(i.getKlub());
     
@@ -370,9 +377,15 @@ private void napuniView(){
      } catch (Exception e) {
          i.setBroj( 0);
      }
-   // i.setDatumRodjenja(datumRodjenja);
+   i.setDatumRodjenja(dpDatumRodjenja.getDate()!=null
+                            ? 
+                            Date.from(dpDatumRodjenja.getDate()
+                            .atStartOfDay()
+                            .atZone(ZoneId.systemDefault())
+                            .toInstant())
+                            : null);
    
-  //i.setKlub(cmbKlubovi.getPrototypeDisplayValue());
+  i.setKlub((Klub)cmbKlubovi.getSelectedItem());
          try {
               i.setTrenutnaVrijednost(BigDecimal.valueOf(df.parse(txtTrenutnaVrijednost.getText()).byteValue()));
          } catch (Exception e) {
@@ -389,6 +402,7 @@ private void napuniView(){
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JComboBox<Klub> cmbKlubovi;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumRodjenja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -400,7 +414,6 @@ private void napuniView(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Igrac> lstPodaci;
     private javax.swing.JTextField txtBrojIgraca;
-    private javax.swing.JTextField txtDatumRodjenja;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtOib;
     private javax.swing.JTextField txtPozicija;
@@ -411,5 +424,14 @@ private void napuniView(){
 
     private void setIcon() {
 setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
+    }
+
+    private void definirajDatumRodjenja() {
+          DatePickerSettings dps = 
+                new DatePickerSettings(new Locale("hr","HR"));
+       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+       dps.setTranslationClear("Očisti");
+       dps.setTranslationToday("Danas");
+       dpDatumRodjenja.setSettings(dps);
     }
 }
