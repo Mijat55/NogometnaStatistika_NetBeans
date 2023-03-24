@@ -283,7 +283,6 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     var u = obrada.getEntitet();
    u.setDomaciKlub((Klub)cmbDomaciKlub.getSelectedItem());
    u.setGostiKlub((Klub)cmbGostiKlub.getSelectedItem());
-   //u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate();
    u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate()!=null? 
    Date.from(dpDatumPocetka.datePicker.getDate()
    .atStartOfDay().atZone(ZoneId.systemDefault())

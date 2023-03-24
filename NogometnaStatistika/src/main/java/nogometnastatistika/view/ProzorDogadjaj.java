@@ -7,6 +7,8 @@ package nogometnastatistika.view;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -55,9 +57,9 @@ private ObradaIgrac obradaIg;
                = new DefaultListModel<>();
        m.addAll(obradaIg.read((Klub)cmbFilterKlub.getSelectedItem()));
               lstIgraciPodaci.setModel(m);
-    lstIgraciPodaci.repaint();  
+   lstIgraciPodaci.repaint();  
    }
-   private void ucitajIgraca(){
+  private void ucitajIgraca(){
              DefaultListModel<Igrac> m = new DefaultListModel<>();
     m.addAll(obradaIg.read(txtTraziIgraca.getText()));
     lstIgraciPodaci.setModel(m);
@@ -420,11 +422,11 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private void lstIgraciPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstIgraciPodaciValueChanged
          if(evt.getValueIsAdjusting()){
            return;
-       }
-       if(lstIgraciPodaci.getSelectedValue()==null){
+      }
+      if(lstIgraciPodaci.getSelectedValue()==null){
            return;
-       }
-       obradaIg.setEntitet(lstIgraciPodaci.getSelectedValue());
+      }
+      obradaIg.setEntitet(lstIgraciPodaci.getSelectedValue());
        
        //napuniView();
     }//GEN-LAST:event_lstIgraciPodaciValueChanged
@@ -435,7 +437,7 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
 
     private void txtTraziIgracaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziIgracaKeyPressed
       
-            ucitajIgraca();
+           ucitajIgraca();
         
     }//GEN-LAST:event_txtTraziIgracaKeyPressed
 
@@ -448,6 +450,19 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     cmbIgraci.setSelectedItem(d.getIgrac());
     cmbUtakmice.setSelectedItem(d.getUtakmica());
     cmbVrste.setSelectedItem(d.getVrsta());
+    //DefaultListModel<Igrac> m = new DefaultListModel<>();
+    //lstIgraciPodaci.setModel(m);
+     
+ 
+   // var i = obradaIg.getEntitet();
+  // cmbFilterKlub.setSelectedItem(i.getImePrezime());
+   // cmbFilterKlub.setSelectedItem(i.getBroj());
+   // cmbFilterKlub.setSelectedItem(i.getDatumRodjenja());
+   // cmbFilterKlub.setSelectedItem(i.getOib());
+   // cmbFilterKlub.setSelectedItem(i.getTrenutnaVrijednost());
+   // cmbFilterKlub.setSelectedItem(i.getDogadjaji());
+    //cmbFilterKlub.setSelectedItem(i.getPozicija());
+    
             
     
 }
@@ -456,19 +471,22 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     
     private void napuniModel(){
     var d = obrada.getEntitet();
-    
-   //d.setUtakmica((Utakmica)cmbUtakmice.setSelectedItem());
-    //d.getIgrac();
-    //d.getVrsta();
-   
+    //d.setIgrac((Igrac)txtTraziIgraca)
+   d.setUtakmica((Utakmica)cmbUtakmice.getSelectedItem());
+   d.setIgrac((Igrac)cmbIgraci.getSelectedItem());
+   d.setVrsta((Vrsta)cmbVrste.getSelectedItem());
           try {
        d.setMinuta(Integer.parseInt(txtMinuta.getText()));
      } catch (Exception e) {
          d.setMinuta(0);
      }
     
-    
-}
+        
+            DefaultListModel<Igrac> m = (DefaultListModel<Igrac>) lstIgraciPodaci.getModel();
+            ;
+            }
+      
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
