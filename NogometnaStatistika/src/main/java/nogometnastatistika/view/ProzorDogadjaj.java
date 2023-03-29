@@ -530,3 +530,4 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
 setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
     }
 }
+//dodaj
