@@ -185,6 +185,11 @@ cmbFilterUtakmica.setSelectedIndex(0);
                 txtMinutaActionPerformed(evt);
             }
         });
+        txtMinuta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMinutaKeyPressed(evt);
+            }
+        });
 
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -444,6 +449,14 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private void btnTrazi2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTrazi2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTrazi2KeyPressed
+
+    private void txtMinutaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMinutaKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            txtMinuta.setEditable(true);
+          JOptionPane.showMessageDialog(getRootPane(), "Možete unijeti samo broj");  
+        }
+    }//GEN-LAST:event_txtMinutaKeyPressed
  private void napuniView(){
     var d = obrada.getEntitet();
     txtMinuta.setText(String.valueOf(d.getMinuta()));

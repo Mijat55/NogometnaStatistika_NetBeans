@@ -41,16 +41,52 @@ public class ObradaDogadjaj extends Obrada<Dogadjaj>{
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {
+       kontrolaUnosUtakmica();
+       kontrolaUnosIgrac();
+       kontrolaUnosVrsta();
+       //kontrolaUnosMinuta();
     }
 
     @Override
     protected void kontrolaPromjena() throws NogometnaStatistikaException {
+        promjenaUtakmica();
+        promjenaUnosVrsta();
+        promjenaUnosIgrac();
     }
 
-    @Override
+     @Override
     protected void kontrolaBrisanje() throws NogometnaStatistikaException {
+    
     }
-    
-    
-    
+   
+    private void kontrolaUnosUtakmica()throws NogometnaStatistikaException{
+          if(entitet.getUtakmica().getSifra()==0){
+            throw new NogometnaStatistikaException("Obavezan odabir utakmice");
+        }
+    }
+    private void kontrolaUnosIgrac() throws NogometnaStatistikaException{
+        if(entitet.getIgrac().getSifra()==0){
+            throw new NogometnaStatistikaException("Obavezan odabir igrača");
+        }
+    }
+    private void kontrolaUnosVrsta()throws NogometnaStatistikaException{
+        if(entitet.getVrsta().getSifra()==0){
+            throw new NogometnaStatistikaException("Obavezan odabir vrste");
+        }
+    }
+    private void promjenaUtakmica()throws NogometnaStatistikaException{
+          if(entitet.getUtakmica().getSifra()==0){
+            throw new NogometnaStatistikaException("Obavezan odabir utakmice na kojoj želite promjeniti događaj");
+        }
+    }
+    private void promjenaUnosIgrac() throws NogometnaStatistikaException{
+        if(entitet.getIgrac().getSifra()==0){
+            throw new NogometnaStatistikaException("Obavezan odabir igrača kojem želite promjeniti događaj");
+        }
+    }
+    private void promjenaUnosVrsta()throws NogometnaStatistikaException{
+        if(entitet.getVrsta().getSifra()==0){
+            throw new NogometnaStatistikaException("Obavezan odabir vrste kojoj želite promjeniti događaj");
+        }
+    }
 }

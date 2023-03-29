@@ -50,6 +50,7 @@ public class ObradaIgrac extends Obrada<Igrac>{
         if(entitet.getKlub().getSifra()==0){
            throw new NogometnaStatistikaException("Obavezno odabir Kluba");
        }
+        kontrolaPozicijaNijeBroj();
     }
 
     @Override
@@ -58,6 +59,7 @@ public class ObradaIgrac extends Obrada<Igrac>{
         kontrolaPrezime();
         kontrolaTrenutnaVrijednost();
         kontrolaOib();
+        kontrolaPozicijaNijeBroj();
     }
 
     @Override
@@ -111,7 +113,7 @@ public class ObradaIgrac extends Obrada<Igrac>{
              throw new NogometnaStatistikaException("Prezime mora imati minimalno 3 znaka");
          } 
     }
-                            private void kontrolaPrezimeNijeBroj() throws NogometnaStatistikaException  {
+  private void kontrolaPrezimeNijeBroj() throws NogometnaStatistikaException  {
      
         boolean broj=false;
         
@@ -127,6 +129,7 @@ public class ObradaIgrac extends Obrada<Igrac>{
         }
         
     }
+  
     
     private void kontrolaIme() throws NogometnaStatistikaException{
         kontrolaImeNull();
@@ -149,20 +152,27 @@ public class ObradaIgrac extends Obrada<Igrac>{
              throw new NogometnaStatistikaException("Ime mora imati minimalno 3 znaka");
          } 
     }
-                  private void kontrolaImeNijeBroj() throws NogometnaStatistikaException  {
-     
+        private void kontrolaImeNijeBroj() throws NogometnaStatistikaException  {
         boolean broj=false;
-        
         try {
             Double.parseDouble(entitet.getIme());
             broj=true;
         } catch (Exception e) {
-            
         }
         
         if(broj){
             throw new NogometnaStatistikaException("Ime ne smije biti broj");
         }
-        
+    }
+   private void kontrolaPozicijaNijeBroj() throws NogometnaStatistikaException  {
+        boolean broj=false;
+        try {
+            Double.parseDouble(entitet.getPozicija());
+            broj=true;
+        } catch (Exception e) {
+        }
+        if(broj){
+            throw new NogometnaStatistikaException("Pozicija ne smije biti broj");
+        }
     }
 }

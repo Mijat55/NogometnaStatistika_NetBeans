@@ -287,10 +287,12 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
    Date.from(dpDatumPocetka.datePicker.getDate()
    .atStartOfDay().atZone(ZoneId.systemDefault())
    .toInstant()): null);
-  // u.setVrijemePocetka(dpDatumPocetka.timePicker.getTime()!=null? 
-  // Date.from(dpDatumPocetka.timePicker.getTime()
-   //.atDate(LocalDate.MAX)
-   //.toInstant()): null);
+  //u.setVrijemePocetka(dpDatumPocetka.timePicker.getTime()!=null?
+      
+         
+          
+           
+           
   
      try {
        u.setMaksimalanBrojNavijaca(Integer.parseInt(txtBrojNavijaca.getText()));

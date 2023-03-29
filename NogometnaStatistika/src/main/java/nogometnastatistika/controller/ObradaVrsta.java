@@ -22,11 +22,13 @@ public class ObradaVrsta extends Obrada<Vrsta>{
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {
         kontrolaVrsta();
+        kontrolaNazivNijeBroj();
     }
 
     @Override
     protected void kontrolaPromjena() throws NogometnaStatistikaException {
         kontrolaVrsta();
+        kontrolaNazivNijeBroj();
     }
 
     @Override
@@ -59,5 +61,16 @@ public class ObradaVrsta extends Obrada<Vrsta>{
          if(entitet.getNaziv().trim().length()<3){
              throw new NogometnaStatistikaException("Naziv vrste mora imati minimalno 3 znaka");
          } 
+    }
+            private void kontrolaNazivNijeBroj() throws NogometnaStatistikaException  {
+        boolean broj=false;
+        try {
+            Double.parseDouble(entitet.getNaziv());
+            broj=true;
+        } catch (Exception e) {
+        }
+        if(broj){
+            throw new NogometnaStatistikaException("Vrsta ne smije biti broj");
+        }
     }
 }

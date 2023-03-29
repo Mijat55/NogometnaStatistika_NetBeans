@@ -8,6 +8,7 @@ import com.github.lgooddatepicker.components.DatePickerSettings;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
@@ -126,6 +127,11 @@ public class ProzorIgrac extends javax.swing.JFrame {
         jLabel5.setText("~Vrijednost Igrača~");
 
         txtTrenutnaVrijednost.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTrenutnaVrijednost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTrenutnaVrijednostKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("~Pozicija Igrača~");
 
@@ -153,6 +159,12 @@ public class ProzorIgrac extends javax.swing.JFrame {
         });
 
         jLabel8.setText("~Broj Igrača~");
+
+        txtBrojIgraca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBrojIgracaKeyPressed(evt);
+            }
+        });
 
         txtUvjet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,13 +224,11 @@ public class ProzorIgrac extends javax.swing.JFrame {
                     .addComponent(cmbKlubovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dpDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtTrenutnaVrijednost, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtBrojIgraca, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtPozicija, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                    .addComponent(txtTrenutnaVrijednost)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtBrojIgraca)
+                    .addComponent(txtPozicija)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -350,6 +360,22 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private void btnDovuciOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDovuciOibActionPerformed
      txtOib.setText(Alati.dovuciOib());
     }//GEN-LAST:event_btnDovuciOibActionPerformed
+
+    private void txtTrenutnaVrijednostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrenutnaVrijednostKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            txtTrenutnaVrijednost.setEditable(true);
+          JOptionPane.showMessageDialog(getRootPane(), "Možete unijeti samo broj");  
+        }
+    }//GEN-LAST:event_txtTrenutnaVrijednostKeyPressed
+
+    private void txtBrojIgracaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBrojIgracaKeyPressed
+         char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            txtBrojIgraca.setEditable(true);
+          JOptionPane.showMessageDialog(getRootPane(), "Možete unijeti samo broj");  
+        }
+    }//GEN-LAST:event_txtBrojIgracaKeyPressed
 private void napuniView(){
     var i = obrada.getEntitet();
     txtIme.setText(i.getIme());
