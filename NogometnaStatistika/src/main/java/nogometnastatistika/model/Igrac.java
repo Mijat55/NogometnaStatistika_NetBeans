@@ -126,7 +126,7 @@ public class Igrac extends Entitet{
         if(broj ==null || klub ==null){
             return ime + " " +prezime;
         }
-        return  ime + " " + prezime + "(" + broj + ")" + "-" + "*"+  klub + "*";
+        return  ime + " " + prezime + "(" + broj + ")";
     }
 
   

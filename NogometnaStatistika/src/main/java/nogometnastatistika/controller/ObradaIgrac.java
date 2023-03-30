@@ -24,11 +24,7 @@ public class ObradaIgrac extends Obrada<Igrac>{
         return session.createQuery("from Igrac", Igrac.class).list();
        
     }
-      public List<Igrac> read(Klub k) {
-       return session.createQuery("from Igrac" + " where klub=:klub",
-              Igrac.class).setParameter("klub", k).list();
-   }
-     public List<Igrac> read(String uvjet) {
+      public List<Igrac> read(String uvjet) {
         uvjet=uvjet.trim();
         uvjet = "%" + uvjet + "%";
        return session.createQuery("from Igrac "
@@ -40,7 +36,6 @@ public class ObradaIgrac extends Obrada<Igrac>{
                .setMaxResults(30)
                .list();
     }
-
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {
         kontrolaIme();

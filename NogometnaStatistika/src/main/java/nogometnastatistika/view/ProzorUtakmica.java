@@ -5,15 +5,10 @@
 package nogometnastatistika.view;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings;
 import java.awt.Toolkit;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.OffsetTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.Date;
-import java.util.Locale;
+import java.time.Instant;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -23,6 +18,13 @@ import nogometnastatistika.model.Klub;
 import nogometnastatistika.model.Utakmica;
 import nogometnastatistika.util.Aplikacija;
 import nogometnastatistika.util.NogometnaStatistikaException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -283,13 +285,17 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     var u = obrada.getEntitet();
    u.setDomaciKlub((Klub)cmbDomaciKlub.getSelectedItem());
    u.setGostiKlub((Klub)cmbGostiKlub.getSelectedItem());
-   u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate()!=null? 
+  u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate()!=null? 
    Date.from(dpDatumPocetka.datePicker.getDate()
    .atStartOfDay().atZone(ZoneId.systemDefault())
-   .toInstant()): null);
+  .toInstant()): null);
   //u.setVrijemePocetka(dpDatumPocetka.timePicker.getTime()!=null?
-      
-         
+       //  Date.from(dpDatumPocetka.timePicker.getTime().
+  //LocalDate ld = u.getVrijemePocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+  //dpDatumPocetka.datePicker.getText();
+ // LocalTime lt = u.getVrijemePocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+   // dpDatumPocetka.timePicker.setTime(lt);
+     
           
            
            
@@ -331,5 +337,10 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
         dps.setFormatForDatesCommonEra("dd. MM. YYY. ");
         dps.setTranslationClear("Očisti");
        dpDatumPocetka.datePicker.setSettings(dps);
+        
+        
+       TimePickerSettings tps = new TimePickerSettings(new Locale("hr", "HR"));
+       tps.setFormatForDisplayTime("HH:MM");
     }
+   
 }

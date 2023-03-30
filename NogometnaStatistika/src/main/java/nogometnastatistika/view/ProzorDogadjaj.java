@@ -43,25 +43,17 @@ private ObradaIgrac obradaIg;
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() +
                 ": Dogadjaji");
-        ucitajIgrace();
-        ucitajUtakmice();
         ucitajVrste();
         ucitajFilterUtakmice();
-        ucitajFilterKlub();
         ucitaj();
-        ucitajIg();
         ucitajIgraca();
     }
-   private void ucitajIg(){
-       DefaultListModel<Igrac> m
-               = new DefaultListModel<>();
-       m.addAll(obradaIg.read((Klub)cmbFilterKlub.getSelectedItem()));
-              lstIgraciPodaci.setModel(m);
-   lstIgraciPodaci.repaint();  
-   }
+  
+   
+   
   private void ucitajIgraca(){
              DefaultListModel<Igrac> m = new DefaultListModel<>();
-    m.addAll(obradaIg.read(txtTraziIgraca.getText()));
+    m.addAll(new ObradaDogadjaj().readIgraciNaUtakmici((Utakmica)cmbFilterUtakmica.getSelectedItem()));
     lstIgraciPodaci.setModel(m);
     lstIgraciPodaci.repaint();
    }
@@ -75,16 +67,9 @@ private ObradaIgrac obradaIg;
     lstPodaci.setModel(m);
     lstPodaci.repaint();
      }
-     private void ucitajFilterKlub(){
-         DefaultComboBoxModel<Klub> m
-                 = new DefaultComboBoxModel<>();
-         m.addAll(new ObradaKlub().read());
-         cmbFilterKlub.setModel(m);
-         cmbFilterKlub.repaint();
-         cmbFilterKlub.setSelectedIndex(0);
-     }
+   
         private void ucitajFilterUtakmice(){
-            DefaultComboBoxModel<Utakmica> m 
+                 DefaultComboBoxModel<Utakmica> m 
                   = new DefaultComboBoxModel<>();
 m.addAll(new ObradaUtakmica().read());
 cmbFilterUtakmica.setModel(m);
@@ -93,31 +78,6 @@ cmbFilterUtakmica.setSelectedIndex(0);
     
     
 }
-         private void ucitajIgrace(){
-             DefaultComboBoxModel<Igrac> m
-                = new DefaultComboBoxModel<>();
-        Igrac i = new Igrac();
-        i.setSifra(0);
-        i.setIme("Nije");
-        i.setPrezime("odabrano");
-        m.addElement(i);
-        m.addAll(new ObradaIgrac().read());
-        cmbIgraci.setModel(m);
-        cmbIgraci.repaint();
-        
-    }
-        private void ucitajUtakmice(){
-        DefaultComboBoxModel<Utakmica> m
-        = new DefaultComboBoxModel<>();
-        Utakmica u = new Utakmica();
-        u.setSifra(0);
-        u.setStadion("Nije odabrano");
-        m.addElement(u);
-        m.addAll(new ObradaUtakmica().read());
-        cmbUtakmice.setModel(m);
-        cmbUtakmice.repaint();
-        
-    }
         private void ucitajVrste(){
         DefaultComboBoxModel<Vrsta> m
         = new DefaultComboBoxModel<>();
@@ -142,8 +102,6 @@ cmbFilterUtakmica.setSelectedIndex(0);
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMinuta = new javax.swing.JTextField();
@@ -151,16 +109,10 @@ cmbFilterUtakmica.setSelectedIndex(0);
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         btnTrazi = new javax.swing.JButton();
-        cmbIgraci = new javax.swing.JComboBox<>();
-        cmbUtakmice = new javax.swing.JComboBox<>();
         cmbVrste = new javax.swing.JComboBox<>();
         cmbFilterUtakmica = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstIgraciPodaci = new javax.swing.JList<>();
-        cmbFilterKlub = new javax.swing.JComboBox<>();
-        btnTraziKlub = new javax.swing.JButton();
-        txtTraziIgraca = new javax.swing.JTextField();
-        btnTrazi2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -171,10 +123,6 @@ cmbFilterUtakmica.setSelectedIndex(0);
             }
         });
         jScrollPane1.setViewportView(lstPodaci);
-
-        jLabel1.setText("~Unos Igrača~");
-
-        jLabel2.setText("~Unos Utakmice~");
 
         jLabel3.setText("~Unos Vrste~");
 
@@ -224,12 +172,6 @@ cmbFilterUtakmica.setSelectedIndex(0);
             }
         });
 
-        cmbUtakmice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbUtakmiceActionPerformed(evt);
-            }
-        });
-
         lstIgraciPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstIgraciPodaciValueChanged(evt);
@@ -237,110 +179,73 @@ cmbFilterUtakmica.setSelectedIndex(0);
         });
         jScrollPane2.setViewportView(lstIgraciPodaci);
 
-        btnTraziKlub.setText("🔍");
-        btnTraziKlub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTraziKlubActionPerformed(evt);
-            }
-        });
-
-        txtTraziIgraca.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTraziIgracaKeyPressed(evt);
-            }
-        });
-
-        btnTrazi2.setText("🔍");
-        btnTrazi2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTrazi2ActionPerformed(evt);
-            }
-        });
-        btnTrazi2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnTrazi2KeyPressed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbFilterUtakmica, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDodaj)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPromjeni)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnObrisi))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtMinuta, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(cmbIgraci, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbUtakmice, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbFilterKlub, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTraziKlub)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTraziIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTrazi2))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 26, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtMinuta, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnPromjeni)
+                                            .addComponent(btnObrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnTrazi)
-                        .addComponent(cmbFilterUtakmica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(cmbFilterKlub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTraziKlub)
-                        .addComponent(txtTraziIgraca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTrazi2)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTrazi)
+                    .addComponent(cmbFilterUtakmica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbIgraci, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(2, 2, 2)
-                        .addComponent(cmbUtakmice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(cmbVrste, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnPromjeni))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnDodaj)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDodaj)
-                            .addComponent(btnPromjeni)
+                            .addComponent(txtMinuta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnObrisi)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         pack();
@@ -406,49 +311,20 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
         ucitaj();
+        ucitajIgraca();
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void txtMinutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinutaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMinutaActionPerformed
 
-    private void cmbUtakmiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUtakmiceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbUtakmiceActionPerformed
-
-    private void btnTraziKlubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziKlubActionPerformed
-      ucitajIg();
-    }//GEN-LAST:event_btnTraziKlubActionPerformed
-
-    private void btnTrazi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazi2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTrazi2ActionPerformed
-
     private void lstIgraciPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstIgraciPodaciValueChanged
-         if(evt.getValueIsAdjusting()){
-           return;
-      }
-      if(lstIgraciPodaci.getSelectedValue()==null){
-           return;
-      }
-      obradaIg.setEntitet(lstIgraciPodaci.getSelectedValue());
-       
-       //napuniView();
+     
     }//GEN-LAST:event_lstIgraciPodaciValueChanged
 
     private void btnTraziKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTraziKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTraziKeyPressed
-
-    private void txtTraziIgracaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTraziIgracaKeyPressed
-      
-           ucitajIgraca();
-        
-    }//GEN-LAST:event_txtTraziIgracaKeyPressed
-
-    private void btnTrazi2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTrazi2KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTrazi2KeyPressed
 
     private void txtMinutaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMinutaKeyPressed
         char c = evt.getKeyChar();
@@ -460,33 +336,16 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
  private void napuniView(){
     var d = obrada.getEntitet();
     txtMinuta.setText(String.valueOf(d.getMinuta()));
-    cmbIgraci.setSelectedItem(d.getIgrac());
-    cmbUtakmice.setSelectedItem(d.getUtakmica());
+    //cmbIgraci.setSelectedItem(d.getIgrac());
+    //cmbUtakmice.setSelectedItem(d.getUtakmica());
     cmbVrste.setSelectedItem(d.getVrsta());
-    //DefaultListModel<Igrac> m = new DefaultListModel<>();
-    //lstIgraciPodaci.setModel(m);
-     
- 
-   // var i = obradaIg.getEntitet();
-  // cmbFilterKlub.setSelectedItem(i.getImePrezime());
-   // cmbFilterKlub.setSelectedItem(i.getBroj());
-   // cmbFilterKlub.setSelectedItem(i.getDatumRodjenja());
-   // cmbFilterKlub.setSelectedItem(i.getOib());
-   // cmbFilterKlub.setSelectedItem(i.getTrenutnaVrijednost());
-   // cmbFilterKlub.setSelectedItem(i.getDogadjaji());
-    //cmbFilterKlub.setSelectedItem(i.getPozicija());
-    
-            
-    
+   
 }
-    
-    
     
     private void napuniModel(){
     var d = obrada.getEntitet();
-    //d.setIgrac((Igrac)txtTraziIgraca)
-   d.setUtakmica((Utakmica)cmbUtakmice.getSelectedItem());
-   d.setIgrac((Igrac)cmbIgraci.getSelectedItem());
+  d.setUtakmica((Utakmica)cmbFilterUtakmica.getSelectedItem());
+   d.setIgrac(lstIgraciPodaci.getSelectedValue());
    d.setVrsta((Vrsta)cmbVrste.getSelectedItem());
           try {
        d.setMinuta(Integer.parseInt(txtMinuta.getText()));
@@ -507,15 +366,8 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
-    private javax.swing.JButton btnTrazi2;
-    private javax.swing.JButton btnTraziKlub;
-    private javax.swing.JComboBox<Klub> cmbFilterKlub;
     private javax.swing.JComboBox<Utakmica> cmbFilterUtakmica;
-    private javax.swing.JComboBox<Igrac> cmbIgraci;
-    private javax.swing.JComboBox<Utakmica> cmbUtakmice;
     private javax.swing.JComboBox<Vrsta> cmbVrste;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -523,11 +375,9 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     private javax.swing.JList<Igrac> lstIgraciPodaci;
     private javax.swing.JList<Dogadjaj> lstPodaci;
     private javax.swing.JTextField txtMinuta;
-    private javax.swing.JTextField txtTraziIgraca;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {
 setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ball.png" )));
     }
 }
-//dodaj

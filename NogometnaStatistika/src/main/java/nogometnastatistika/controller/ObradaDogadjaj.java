@@ -4,8 +4,10 @@
  */
 package nogometnastatistika.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import nogometnastatistika.model.Dogadjaj;
+import nogometnastatistika.model.Igrac;
 import nogometnastatistika.model.Klub;
 import nogometnastatistika.model.Utakmica;
 import nogometnastatistika.util.NogometnaStatistikaException;
@@ -24,6 +26,42 @@ public class ObradaDogadjaj extends Obrada<Dogadjaj>{
        return session.createQuery("from Dogadjaj" + " where utakmica=:utakmica",
               Dogadjaj.class).setParameter("utakmica", u).list();
    }
+  
+   public List<Igrac> readIgraciNaUtakmici(Utakmica u) {
+      
+      List<Igrac> l = new ArrayList<>();
+        // preraditi na listu Grafpodaci
+         List<Object[]> lista =  session.createNativeQuery(
+                 " select a.* " + 
+" from igrac a inner join klub b " +  
+" on a.klub  = b.sifra  " + 
+" inner join utakmica c on b.sifra =c.domaci_sifra " +  
+" where c.sifra=" + u.getSifra() + " " + 
+" union  " + 
+" select a.* " + 
+" from igrac a inner join klub b " +  
+" on a.klub  = b.sifra  " + 
+" inner join utakmica c on b.sifra =c.gosti_sifra " + 
+" where c.sifra=" + u.getSifra() + ";",Object[].class
+                 )
+                 //.setParameter(1, u.getSifra())
+                 .getResultList();
+       
+         Igrac gf;
+         for(Object[] niz : lista){
+            gf = new Igrac();
+            gf.setSifra(Integer.parseInt(niz[0].toString()));
+            gf.setIme(niz[1].toString());
+            gf.setPrezime(niz[2].toString());
+            gf.setBroj(Integer.parseInt(niz[8].toString()));
+            l.add(gf);
+         }
+        
+        return l;
+              
+      
+      
+   }
    
    
     public List<Dogadjaj> read(String uvjet) {
@@ -38,6 +76,7 @@ public class ObradaDogadjaj extends Obrada<Dogadjaj>{
              .setMaxResults(30)
              .list();
     }
+
 
     @Override
     protected void kontrolaUnos() throws NogometnaStatistikaException {
