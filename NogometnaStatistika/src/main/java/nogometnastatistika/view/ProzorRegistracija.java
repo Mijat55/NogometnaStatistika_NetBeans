@@ -188,6 +188,7 @@ public class ProzorRegistracija extends javax.swing.JFrame {
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 290, 390));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stadium-football.jpg"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

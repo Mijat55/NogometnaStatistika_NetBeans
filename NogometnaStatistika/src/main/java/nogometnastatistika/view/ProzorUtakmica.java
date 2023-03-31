@@ -106,6 +106,7 @@ private ObradaUtakmica obrada;
         dpDatumPocetka = new com.github.lgooddatepicker.components.DateTimePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -170,9 +171,8 @@ private ObradaUtakmica obrada;
                     .addComponent(cmbDomaciKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbGostiKlub, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dpDatumPocetka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtBrojNavijaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addComponent(txtStadion, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(txtBrojNavijaca)
+                    .addComponent(txtStadion))
                 .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -74,33 +74,22 @@ public Vrijeme (){
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jToolBar1.setRollover(true);
         jToolBar1.add(lblVrijeme);
-
-        jMenu1.setText("Aplikacija");
-
-        jMenuItem1.setText("Izlaz");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Programi");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +140,18 @@ public Vrijeme (){
 
         jMenuBar1.add(jMenu2);
 
+        jMenu1.setText("Aplikacija");
+
+        jMenuItem1.setText("Izlaz");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
         jMenu3.setText("O aplikaciji");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,12 +175,12 @@ public Vrijeme (){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 307, Short.MAX_VALUE)
+                .addGap(0, 236, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -195,7 +196,18 @@ public Vrijeme (){
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-     JOptionPane.showMessageDialog(getRootPane(), "Aplikacija za provjeru nogometne statistike","O aplikaciji"
+     JOptionPane.showMessageDialog(getRootPane(), "~Naziv aplikacije - Nogometna Statistika\n" +
+"\n" +
+"~Opis aplikacije- Aplikacija je napravljena isključivo radi analize i provjere ili evidentiranja određenih nogometnih klubova,igrača,utakmica i događaja.\n" +
+"\n" +
+"~Vizuelni pristup aplikacije- Aplikacija se sastoji od glavnog menija koji sadrži glavne stavke kao što su (Utakmica,Klub,Igrač,Događaj,Vrsta), "
+             + "svaka od navedenih stavki ima svoj \"podmeni\" koji još sadrži opcije(Pregled,Unos,Izmjena,Brisanje),"
+             + " što naravno govori da aplikacija ima mogućnost pregleda trenutnih podataka,unosa novih podataka,izmjenu postojećeg podatka ili brisanje određenog.\n" +
+"\n" +
+"~Memorija aplikacije- Aplikacija nije memorijski zahtjevna,rađena je po osnovnim principima u kojima se nalaze samo podatkovni zapisi kao što su popis utakmica,liste igrača i klubova te "
+             + "golova,asistencija,žutih te crvenih kartona,ozljeda i naravno minuta.\n" +
+"\n" +
+"~Podrška aplikacije- Za sve nejasnoće ili poteškoće vezane uz aplikaciju \"NogometnaStatistika\" slobodno se možete obratiti administratoru iste na email(mijat5555@gmail.com)","O aplikaciji"
              ,JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
