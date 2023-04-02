@@ -18,7 +18,7 @@ import nogometnastatistika.util.Aplikacija;
  * @author Marko
  */
 public class ProzorIzbornik extends javax.swing.JFrame {
-
+//dodati video
     /**
      * Creates new form ProzorIzbornik
      */
