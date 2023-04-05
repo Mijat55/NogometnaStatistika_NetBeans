@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -428,21 +429,12 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
     var u = obrada.getEntitet();
    u.setDomaciKlub((Klub)cmbDomaciKlub.getSelectedItem());
    u.setGostiKlub((Klub)cmbGostiKlub.getSelectedItem());
-  u.setVrijemePocetka(dpDatumPocetka.datePicker.getDate()!=null? 
-   Date.from(dpDatumPocetka.datePicker.getDate()
-   .atStartOfDay().atZone(ZoneId.systemDefault())
-  .toInstant()): null);
-  
-  //u.setVrijemePocetka(dpDatumPocetka.timePicker.getTime()!=null?
-       //  Date.from(dpDatumPocetka.timePicker.getTime().
-  //LocalDate ld = u.getVrijemePocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-  //dpDatumPocetka.datePicker.getText();
- // LocalTime lt = u.getVrijemePocetka().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
-   // dpDatumPocetka.timePicker.setTime(lt);
-     
-          
-           
-           
+   LocalDate ld = dpDatumPocetka.datePicker.getDate();
+   LocalTime lt = dpDatumPocetka.timePicker.getTime();
+   LocalDateTime fromDateAndTime = LocalDateTime.of(ld,
+                                                           lt);
+   Date datum = Date.from(fromDateAndTime.atZone(ZoneId.systemDefault()).toInstant());
+   u.setVrijemePocetka(datum);
   
      try {
        u.setMaksimalanBrojNavijaca(Integer.parseInt(txtBrojNavijaca.getText()));
@@ -490,7 +482,23 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
         
         
        TimePickerSettings tps = new TimePickerSettings(new Locale("hr", "HR"));
-       tps.setFormatForDisplayTime("HH:MM");
-    }
+       tps.setFormatForDisplayTime("HH:mm");
+      dpDatumPocetka.timePicker
+                .getSettings()
+         
+               .use24HourClockFormat();
+        
+        ArrayList<LocalTime> lista = new ArrayList<>();
+        
+        for(int j=0;j<24;j++){
+        for(int i=0;i<60;i+=5){
+            lista.add(LocalTime.of(j, i));
+        }
+        }
+        
+        
+        dpDatumPocetka.timePicker.getSettings()
+                .generatePotentialMenuTimes(lista);
    
+}
 }
