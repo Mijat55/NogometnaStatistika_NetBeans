@@ -49,43 +49,41 @@
                               <Component id="txtUvjet" min="-2" pref="145" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="btnTrazi" min="-2" pref="49" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="btnExExcel" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="btnDodaj" min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnPromjeni" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnObrisi" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="btnDodaj" min="-2" pref="87" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnPromjeni" min="-2" pref="91" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnObrisi" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="txtPrezime" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtIme" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtOib" min="-2" pref="182" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnDovuciOib" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="cmbKlubovi" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dpDatumRodjenja" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtTrenutnaVrijednost" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtBrojIgraca" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtPozicija" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
-                              </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="txtPrezime" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtIme" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtOib" min="-2" pref="182" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnDovuciOib" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="cmbKlubovi" alignment="0" max="32767" attributes="0"/>
+                          <Component id="dpDatumRodjenja" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTrenutnaVrijednost" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtBrojIgraca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPozicija" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -147,6 +145,7 @@
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="txtUvjet" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExExcel" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -438,14 +437,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnUtakmica">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Georgia" size="12" style="1"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Utakmica"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
           </Border>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -454,14 +453,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnVrsta">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Georgia" size="12" style="1"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Vrsta"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
           </Border>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -470,14 +469,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDogadjaj">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Georgia" size="12" style="1"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Doga&#x111;aj"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
           </Border>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -486,14 +485,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnIzbornik">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Georgia" size="12" style="1"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Izbornik"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
           </Border>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -502,14 +501,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnIzlaz">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Georgia" size="12" style="1"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Izlaz"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
           </Border>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -518,18 +517,26 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnKlub">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Georgia" size="12" style="1"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Klub"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
             <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
           </Border>
         </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="1"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKlubActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExExcel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ExExcel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExExcelActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

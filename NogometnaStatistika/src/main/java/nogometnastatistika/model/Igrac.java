@@ -123,9 +123,9 @@ public class Igrac extends Entitet{
 
     @Override
     public String toString() {
-        if(broj ==null || klub ==null){
-            return ime + " " +prezime;
-        }
+       // if(broj ==null || klub ==null){
+         //   return ime + " " +prezime;
+      //  }
         return  ime + " " + prezime + "(" + broj + ")";
     }
 

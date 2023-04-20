@@ -5,8 +5,11 @@
 package nogometnastatistika.view;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.text.DecimalFormat;
@@ -17,14 +20,26 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import nogometnastatistika.controller.ObradaIgrac;
 import nogometnastatistika.controller.ObradaKlub;
+import nogometnastatistika.model.Dogadjaj;
 import nogometnastatistika.model.Igrac;
 import nogometnastatistika.model.Klub;
 import nogometnastatistika.util.Aplikacija;
 import nogometnastatistika.util.NogometnaStatistikaException;
 import nogometnastatistika.util.Alati;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  *
  * @author Marko
@@ -111,6 +126,7 @@ public class ProzorIgrac extends javax.swing.JFrame {
         btnIzbornik = new javax.swing.JButton();
         btnIzlaz = new javax.swing.JButton();
         btnKlub = new javax.swing.JButton();
+        btnExExcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -235,57 +251,64 @@ public class ProzorIgrac extends javax.swing.JFrame {
         cmbKlubovi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cmbKlubovi.setFont(new java.awt.Font("Georgia", 3, 12)); // NOI18N
 
-        btnUtakmica.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnUtakmica.setText("Utakmica");
         btnUtakmica.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnUtakmica.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnUtakmica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUtakmicaActionPerformed(evt);
             }
         });
 
-        btnVrsta.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnVrsta.setText("Vrsta");
         btnVrsta.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnVrsta.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnVrsta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVrstaActionPerformed(evt);
             }
         });
 
-        btnDogadjaj.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnDogadjaj.setText("Događaj");
         btnDogadjaj.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnDogadjaj.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnDogadjaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDogadjajActionPerformed(evt);
             }
         });
 
-        btnIzbornik.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnIzbornik.setText("Izbornik");
         btnIzbornik.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnIzbornik.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnIzbornik.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzbornikActionPerformed(evt);
             }
         });
 
-        btnIzlaz.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnIzlaz.setText("Izlaz");
         btnIzlaz.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnIzlaz.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnIzlaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzlazActionPerformed(evt);
             }
         });
 
-        btnKlub.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnKlub.setText("Klub");
         btnKlub.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnKlub.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         btnKlub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKlubActionPerformed(evt);
+            }
+        });
+
+        btnExExcel.setText("ExExcel");
+        btnExExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExExcelActionPerformed(evt);
             }
         });
 
@@ -315,37 +338,37 @@ public class ProzorIgrac extends javax.swing.JFrame {
                                 .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(12, 12, 12)
+                                .addComponent(btnExExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnPromjeni, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrezime)
-                                    .addComponent(txtIme)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnDovuciOib))
-                                    .addComponent(cmbKlubovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dpDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtTrenutnaVrijednost)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtBrojIgraca)
-                                    .addComponent(txtPozicija)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(btnPromjeni, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrezime)
+                            .addComponent(txtIme)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDovuciOib))
+                            .addComponent(cmbKlubovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dpDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTrenutnaVrijednost)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtBrojIgraca)
+                            .addComponent(txtPozicija)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -397,7 +420,8 @@ public class ProzorIgrac extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTrazi)))
+                        .addComponent(btnTrazi)
+                        .addComponent(btnExExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cmbKlubovi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -531,6 +555,106 @@ JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());        }
         new ProzorKlub().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnKlubActionPerformed
+
+    private void btnExExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExExcelActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        jfc.setCurrentDirectory(new File(System.getProperty("user.home")));
+        jfc.setSelectedFile(new File(System.getProperty("user.home")
+                + File.separator + "podaci.xlsx"));
+        if (jfc.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        try {
+
+            Workbook workbook = new XSSFWorkbook(); 
+            CreationHelper createHelper = workbook.getCreationHelper();
+            Sheet sheet = workbook.createSheet("Igraci klubova");
+            Font headerFont = workbook.createFont();
+            headerFont.setBold(true);
+            headerFont.setFontHeightInPoints((short) 14);
+            headerFont.setColor(IndexedColors.RED.getIndex());
+
+           
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            headerCellStyle.setFont(headerFont);
+
+            
+            Row headerRow = sheet.createRow(0);
+
+            
+            Cell cell = headerRow.createCell(0);
+            cell.setCellValue("Igrac");
+            cell.setCellStyle(headerCellStyle);
+
+            cell = headerRow.createCell(1);
+            cell.setCellValue("Utakmica");
+            cell.setCellStyle(headerCellStyle);
+
+            cell = headerRow.createCell(2);
+            cell.setCellValue("Vrsta");
+            cell.setCellStyle(headerCellStyle);
+
+            cell = headerRow.createCell(3);
+            cell.setCellValue("Minuta");
+            cell.setCellStyle(headerCellStyle);
+
+          
+            int rowNum = 1;
+            Row row;
+           
+            for (Dogadjaj d : obrada.getEntitet().getDogadjaji()) {
+                
+                    
+                
+                row = sheet.createRow(rowNum++);
+
+                row.createCell(0)
+                        .setCellValue(d.getIgrac().getImePrezime());
+
+                row.createCell(1)
+                        .setCellValue(d.getUtakmica().getDomaciGosti());
+
+                row.createCell(2)
+                        .setCellValue(d.getVrsta().getNaziv());
+
+                row.createCell(3)
+                        .setCellValue(d.getMinuta());
+                
+
+            }
+            
+
+            row = sheet.createRow(rowNum);
+            cell = row.createCell(3);
+            CellStyle style = workbook.createCellStyle();
+            DataFormat format = workbook.createDataFormat();
+            style.setDataFormat(format.getFormat("0.00"));
+            cell.setCellStyle(style);
+            cell.setCellFormula("sum(E2:E" + (rowNum) + ")");
+
+           
+            for (int i = 0; i < 4; i++) {
+                sheet.autoSizeColumn(i);
+            }
+
+           
+            FileOutputStream fileOut = new FileOutputStream(jfc.getSelectedFile());
+            workbook.write(fileOut);
+            fileOut.close();
+
+            
+            workbook.close();
+
+            ProcessBuilder builder = new ProcessBuilder(
+                    "cmd.exe", "/c", jfc.getSelectedFile().getAbsolutePath());
+            builder.redirectErrorStream(true);
+            Process p = builder.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnExExcelActionPerformed
 private void napuniView(){
     var i = obrada.getEntitet();
     txtIme.setText(i.getIme());
@@ -568,8 +692,9 @@ private void napuniView(){
    
   i.setKlub((Klub)cmbKlubovi.getSelectedItem());
          try {
-              i.setTrenutnaVrijednost(BigDecimal.valueOf(df.parse(txtTrenutnaVrijednost.getText()).byteValue()));
+              i.setTrenutnaVrijednost(BigDecimal.valueOf(df.parse(txtTrenutnaVrijednost.getText()).doubleValue()));
          } catch (Exception e) {
+             i.setTrenutnaVrijednost(BigDecimal.ZERO);
          }
          
     
@@ -580,6 +705,7 @@ private void napuniView(){
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnDogadjaj;
     private javax.swing.JButton btnDovuciOib;
+    private javax.swing.JButton btnExExcel;
     private javax.swing.JButton btnIzbornik;
     private javax.swing.JButton btnIzlaz;
     private javax.swing.JButton btnKlub;

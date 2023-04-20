@@ -81,10 +81,9 @@ public Vrijeme (){
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
 
@@ -104,7 +103,7 @@ public Vrijeme (){
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 120, 20));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 120, 20));
 
         jButton2.setBackground(new java.awt.Color(153, 255, 153));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -117,7 +116,7 @@ public Vrijeme (){
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 120, 20));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 120, 20));
 
         jButton3.setBackground(new java.awt.Color(102, 255, 102));
         jButton3.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -130,7 +129,7 @@ public Vrijeme (){
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 120, 20));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 120, 20));
 
         jButton4.setBackground(new java.awt.Color(51, 255, 51));
         jButton4.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -143,7 +142,7 @@ public Vrijeme (){
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 120, 20));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 120, 20));
 
         jButton5.setBackground(new java.awt.Color(0, 255, 0));
         jButton5.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -156,7 +155,7 @@ public Vrijeme (){
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 120, 20));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 120, 20));
 
         jButton6.setBackground(new java.awt.Color(0, 204, 0));
         jButton6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -169,7 +168,7 @@ public Vrijeme (){
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 120, 20));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 120, 20));
 
         jButton7.setBackground(new java.awt.Color(0, 153, 0));
         jButton7.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -182,7 +181,7 @@ public Vrijeme (){
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 120, 20));
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 120, 20));
 
         jButton8.setBackground(new java.awt.Color(0, 102, 0));
         jButton8.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -195,7 +194,7 @@ public Vrijeme (){
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 120, 20));
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 120, 20));
 
         jButton9.setBackground(new java.awt.Color(51, 102, 0));
         jButton9.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
@@ -208,7 +207,19 @@ public Vrijeme (){
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 120, 20));
+        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 120, 20));
+
+        jButton10.setBackground(new java.awt.Color(0, 102, 0));
+        jButton10.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(204, 204, 204));
+        jButton10.setText("GitHub");
+        jButton10.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 120, 20));
 
         jLabel3.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
         jLabel3.setText("GLAVNI IZBORNIK");
@@ -220,14 +231,7 @@ public Vrijeme (){
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 440));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, 440));
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setText("jLabel2");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 334, 460));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 0, 334, 407));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, 370));
 
         jToolBar1.setRollover(true);
         jToolBar1.add(lblVrijeme);
@@ -240,22 +244,27 @@ public Vrijeme (){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 new ProzorKlub().setVisible(true);
+dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new ProzorUtakmica().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        new ProzorIgrac().setVisible(true);
+       dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         new ProzorVrsta().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
       new ProzorDogadjaj().setVisible(true);
+      dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -299,10 +308,20 @@ new ProzorKlub().setVisible(true);
              ,JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+         String url = "https://github.com/Mijat55/NogometnaStatistika_NetBeans";
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -312,10 +331,8 @@ new ProzorKlub().setVisible(true);
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblVrijeme;
     // End of variables declaration//GEN-END:variables

@@ -80,12 +80,12 @@ public class ObradaIgrac extends Obrada<Igrac>{
     }
     
     private void kontrolaTrenutnaVrijednost () throws NogometnaStatistikaException{
-          if(entitet.getTrenutnaVrijednost()==null ||
+         if(entitet.getTrenutnaVrijednost()==null ||
                 entitet.getTrenutnaVrijednost().compareTo(BigDecimal.ZERO)<=0 ||
                 entitet.getTrenutnaVrijednost().compareTo(new BigDecimal(100000000))==1){
-            throw new NogometnaStatistikaException("Cijena mora biti postavljena, "
-                    + "veća od 0 i manja od 100000000(100miliona)");
-        }
+           throw new NogometnaStatistikaException("Cijena mora biti postavljena, "
+                   + "veća od 0 i manja od 100000000(100miliona)");
+       }
     }
     private void kontrolaPrezime () throws NogometnaStatistikaException{
         kontrolaPrezimeNull();

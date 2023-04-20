@@ -51,9 +51,9 @@ public class ObradaDogadjaj extends Obrada<Dogadjaj>{
          for(Object[] niz : lista){
             gf = new Igrac();
             gf.setSifra(Integer.parseInt(niz[0].toString()));
-            gf.setIme(niz[1].toString());
-            gf.setPrezime(niz[2].toString());
-            gf.setBroj(Integer.parseInt(niz[8].toString()));
+            gf.setIme(niz[3].toString());
+            gf.setPrezime(niz[6].toString());
+            gf.setBroj(Integer.parseInt(niz[1].toString()));
             l.add(gf);
          }
         
